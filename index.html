@@ -1,4 +1,4 @@
-b<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
@@ -11,5 +11,42 @@ b<!DOCTYPE html>
     <h1>小吴的个人空间</h1>
     <img src="jt.png" alt="">
     <h1>你好啊，加油喔</h1>
+
+    <script>
+    var a = 1;
+    function foo() {
+        if (!a) {
+            var a = 2;
+        }
+        alert(a);
+    }
+    foo();
+
+    // let str = '00011111'
+    // let newStr = str.replace('0', '零');
+    // console.log('newStr--',newStr)
+
+    // define
+    (function(window){
+        function fn(str){
+            this.str = str;
+        }
+
+        fn.prototype.format = function(){
+            var arg = Array.prototype.slice.call(arguments,0);
+            return this.str.replace(/\{(\d+)\}/g,function(a,b){
+                return arg[b] || "";
+            })
+        }
+        window.fn = fn;
+    })(window)
+
+    // use
+    (function(){
+        var t = new fn('<p><a href="{0}">{1}</a><span>{2}</span></p>');
+        console.log(t.format('http://www.alibaba.com', 'Alibaba', 'Welcome'));
+    })();
+    
+    </script>
 </body>
 </html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let backTabledata = [{
+            id: '',
+            no: '1',
+            longitude: '103.94292',
+            latitude: '30.620123',
+            altitude: 501.00143,
+            distance: '--'
+        }, {
+            id: '122855',
+            no: '2',
+            longitude: '103.94292',
+            latitude: '30.620123',
+            altitude: 501.00143,
+            distance: '258.25'
+        }, {
+            id: '',
+            no: '3',
+            longitude: '103.94292',
+            latitude: '30.620123',
+            altitude: 501.00143,
+            distance: '253'
+        }, {
+            id: '1222555',
+            no: '4',
+            longitude: '103.94292',
+            latitude: '30.620123',
+            altitude: 501.00143,
+            distance: '253'
+        }];
+
+        let newInfo = backTabledata.filter(item=>{
+            return item.id == ''
+        })
+        console.log('newInfo',newInfo)
+
+        //   let newData1 = backTabledata.map(item=>{
+        //       delete item.id
+        //       return {
+        //         ...item
+        //       }
+        //   })
+        //   console.log('newData1',newData1)
+        //   console.log('backTabledata',backTabledata)
+        // let newData2 = backTabledata.map(item => {
+        //     return {
+        //         no: item.no,
+        //         longitude: item.longitude,
+        //         latitude: item.latitude,
+        //         altitude: item.altitude,
+        //         distance: item.distance
+        //     }
+        // })
+        // console.log('newData2',newData2)
+        // console.log('backTabledata',backTabledata)
+
+        // // 简写
+        // let newData3 = backTabledata.map(({
+        //     no,
+        //     longitude,
+        //     latitude,
+        //     altitude,
+        //     distance
+        // }) => ({
+        //     no,
+        //     longitude,
+        //     latitude,
+        //     altitude,
+        //     distance
+        // }))
+        // console.log('newData3', newData3)
+        // console.log('backTabledata', backTabledata)
+    </script>
+</body>
+
+</html>

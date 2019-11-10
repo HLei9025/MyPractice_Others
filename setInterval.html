@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="box"></h1>
+    <script>
+    var box = document.querySelector('.box');
+    
+    function countStemp(num, el){
+        let timer = setInterval(function(){
+            el.innerHTML = num;
+            num--;
+            if(num < 0){
+                clearInterval(timer);
+            }
+        }, 1000)
+    }
+    countStemp(10, box);
+
+    // function countStemp(num){
+    //     let timer = setInterval(function(){
+    //         document.write(num)
+    //         num--;
+    //         if(num < 0){
+    //             clearInterval(timer);
+    //         }
+    //     }, 1000)
+    // }
+    // countStemp(10);
+    
+    </script>
+</body>
+</html>

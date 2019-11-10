@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    a() // 这个打印结果会是函数体 ƒ a(){ console.log(a) }
+    var a = 100;
+    function a(){
+        console.log(a)
+    }  
+    a() // Uncaught TypeError: a is not a function
+
+    /**
+        涉及到函数以及变量提升问题，以及重名问题
+        解析后为可以类似改写为：
+        var a = function(){ console.log(a) };
+        var a;
+        a()        此处a还是函数，虽然有重新声明了一下a，但是没有新的复制，所以此处执行a()打印的还是那个函数体
+        a = 100;   此时a已经不再是函数了，已经被改为值类型了，所以为什么打印出来说a不是一个function
+        a()        即此处已不是函数的a,执行a()会报错Uncaught TypeError: a is not a function
+    */
+    
+    
+    
+    </script>
+</body>
+</html>

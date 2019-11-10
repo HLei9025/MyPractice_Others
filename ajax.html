@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+    function ajax(option){
+        if(window.XMLHttpRequest){
+            var xhr = new XMLHttpRequest()
+        }else{
+            var xhr = new ActiveXObject(Microsoft.XMLHTTP);
+        }
+        if(option.type === 'get' || option.type === 'GET'){
+            xhr.open(option.type,option.url + '?' + option.data + '&_=' + new Date().getTime(),true);
+            xhr.send(null);
+        }else if(option.type === 'post' || option.type === 'POST'){
+            xhr.open(option.type,option.url,true);
+            xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xhr.send(option.data);
+        }else{
+            alert('该方法暂只支持get和post请求~')
+            return;
+        }
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4){
+                if(xhr.status === 200){
+                    option.succeed(xhr.responseText)
+                }else{
+                    option.failed(xhr.status)
+                }
+            }
+        }
+    }
+    
+    
+    </script>
+</body>
+</html>

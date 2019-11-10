@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    ul, li{
+        list-style: none;
+    }
+    #tab{
+        width: 500px;
+        height: 300px;
+        margin: 100px auto;
+        border: 1px solid #666;
+    }
+    .header{
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+    }
+    .header li{
+        padding: 10px;
+        border-right: 1px solid #666;
+        border-bottom: 1px solid #666;
+    }
+    .content{
+        display: none;
+    }
+    .on{
+        background: #f40;
+    }
+    </style>
+</head>
+<body>
+
+    <div id="tab">
+        <ul class="header">
+            <li class="on">one</li>
+            <li>two</li>
+            <li>three</li>
+        </ul>
+        <div class="">one的内容</div>
+        <div class="content">two的内容</div>
+        <div class="content">three的内容</div>
+    </div>
+
+
+    <script>
+    var oTab = document.querySelector('#tab');
+    var oLis = oTab.getElementsByTagName('li');
+    var oDivs = oTab.getElementsByTagName('div');
+    for(var i = 0; i < oLis.length; i++){
+        oLis[i].index = i;
+        oLis[i].onclick = function(){
+            for(var j = 0; j < oLis.length; j++){
+                oLis[j].className = '';
+                oDivs[j].style.display = 'none';
+            }
+            this.className = 'on';
+            var index = this.index;
+            oDivs[index].style.display = 'block';
+        }
+    }
+    
+    </script>
+</body>
+</html>
