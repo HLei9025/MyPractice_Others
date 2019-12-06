@@ -8,12 +8,26 @@
 </head>
 <body>
     <script>
-    
+        // 类似这样调用
+        ajax({
+            type: 'post',
+            url: 'www.e.com',
+            data: 'asd',
+            succeed: function (data) {
+                console.log('data:', data)
+            },
+            failed: function (err) {
+                console.log('err:', err)
+            }
+        })
+
+
     function ajax(option){
+        let xhr;
         if(window.XMLHttpRequest){
-            var xhr = new XMLHttpRequest()
+            xhr = new XMLHttpRequest();
         }else{
-            var xhr = new ActiveXObject(Microsoft.XMLHTTP);
+            xhr = new ActiveXObject(Microsoft.XMLHTTP);
         }
         if(option.type === 'get' || option.type === 'GET'){
             xhr.open(option.type,option.url + '?' + option.data + '&_=' + new Date().getTime(),true);
