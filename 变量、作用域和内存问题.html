@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>变量、作用域和内存问题</title>
+</head>
+
+<body>
+
+
+
+    <script>
+        // 延长作用域链
+        function buildUrl() {
+            var qs = "?debug=true";
+            with(location) {
+                var url = href + qs;
+            }
+            return url;
+        }
+        console.log(
+        buildUrl()); // file:///D:/MyCode/test/eden/%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98.html?debug=true
+
+        var date = new Date();
+        var h = date.valueOf();
+        console.log('h:', h);
+        var getH = date.getTime();
+        console.log('getH:', getH);
+        var s = date.setTime('1579423877965');
+        var newDate = new Date(s);
+        console.log('s:', s);
+        console.log('newDate:', newDate);
+    </script>
+</body>
+
+</html>

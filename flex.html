@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>外层元素设置了弹性盒之后里层哪些属性会无效</title>
+    <style>
+        /*  1.当子元素设置了 flex 属性的时候， width 无效，
+            2.当弹性盒方向改为纵向 column 的时候，这时 flex 作用的就是纵向的比例了，此时 height 无效，
+            3.不管何种情况，float 无效。
+            4.margin , padding , 定位（ fixed, absolute, relative ）都有效 */
+    #app{
+        width: 800px;
+        height: 600px;
+        border: 1px aquamarine solid;
+        display: flex; 
+        flex-direction: column;
+    }
+    .left{
+        width: 200px;  /* 视情况而定 */
+        /* height: 200px !important; */  /* 即使加了 !important 都无效 */
+        height: 200px;  /* 视情况而定 */
+        background-color: brown;
+        flex: 2;
+        float: left;   /* 无效 */
+        padding-right: 100px;   /* 有效 */
+        position: relative;        /* 有效 */
+        /* position: fixed; */     /* 有效 */
+        /* position: absolute; */  /* 有效 */
+        top: 30px;
+    }
+    .right{
+        background-color: burlywood;
+        flex: 1;
+        margin-top: 10px;   /* 有效 */
+        float: right;  /* 无效 */
+    }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数</title>
+</head>
+<body>
+    
+    
+    <script>
+        function factorial(num){
+            if(num <= 1){
+                return 1;
+            }else{
+                return num * arguments.callee(num-1);
+            }
+        }
+        var result1 = factorial(5);
+        console.log('result1:', result1);
+
+        var trueFactorial = factorial;
+        var result2 = trueFactorial(6);
+        console.log('result2:', result2);
+        console.log('result1:', result1);
+    
+        function outer(){
+            inner();
+        }
+        function inner(){
+            // alert(inner.caller);
+            // alert(arguments.callee.caller);
+            console.log(arguments.callee.caller);
+        }
+        outer();
+        console.log('outer:', outer)
+    </script>
+</body>
+</html>

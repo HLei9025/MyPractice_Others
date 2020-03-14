@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>calc的使用</title>
+    <style>
+        
+    /* calc: CSS3 中新增的样式的计算属性( calculate 的简写) */
+    /* 定义与用法:
+        【 calc() 函数用于动态计算长度值。】
+        1.需要注意的是，运算符前后都需要保留一个空格，例如：width: calc(100% - 10px)；
+        2.任何长度值都可以使用 calc() 函数进行计算；
+        3. calc() 函数支持 "+", "-", "*", "/" 运算；
+        4. calc() 函数使用标准的数学运算优先级规则；
+        【支持版本：CSS3 】*/
+        
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: calc(100% - 2px);
+            height: calc(100% - 2px);
+            border: cadetblue 1px solid;
+        }
+        .con1{
+            width: 200px;
+            height: calc(100% - 10px);
+            background-color: burlywood;
+            float: left;
+            margin: 5px;
+        }
+        .con2{
+            width: calc(100% - 200px - 20px);
+            height: calc(100% - 10px);
+            background-color: chocolate;
+            float: right;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="con1"></div>
+        <div class="con2"></div>
+    </div>
+</body>
+</html>

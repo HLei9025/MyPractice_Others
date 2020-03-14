@@ -1,21 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-    .box{
-        width: 100px;
-        height: 100px;
-        background: red;
-    }
+        .box {
+            width: 500px;
+            height: 500px;
+            background: red;
+        }
     </style>
 </head>
+
 <body>
     <div class="box">
         <p>test</p>
+        <nav>nav</nav>
+        <nav>nav</nav>
+        <section>section</section>
+        <section>section</section>
+        <article>article</article>
+        <article>article</article>
+        <span>span</span>
+        <span>span</span>
     </div>
+
+
+    <script>
+
+        var one = 0.1;
+        var two = 0.2;
+        var three = 0.3;
+        var eight = 0.8;
+        var six = 0.6;
+        console.log([three - two, eight - six]) // 浮点数计算时精度丢失问题。chrome打印结果为 [0.09999999999999998, 0.20000000000000007]
+        console.log([three - two == one, eight - six == two]) // 由于浮点数计算精度丢失，此结果打印为 [false, false]
+
+
+        var a = 3;
+        function fn(a) {
+            console.log(a); // 打印结果为 ƒ a(){}
+            function a() { }
+            var a = 2;
+        }
+        fn(1);
+    </script>
 </body>
+
 </html>

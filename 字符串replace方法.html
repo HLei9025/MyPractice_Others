@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+</head>
+<body>
+
+    <script>
+    /* var a = 1;
+    function foo() {
+        if (!a) {
+            var a = 2;
+        }
+        alert(a);
+    }
+    foo(); */
+
+    // let str = '00011111'
+    // let newStr = str.replace('0', '零');
+    // console.log('newStr--',newStr)
+
+
+
+    // define
+    (function(window){
+        function fn(str){
+            this.str = str;
+        }
+
+        fn.prototype.format = function(){
+            var arg = Array.prototype.slice.call(arguments,0); // 将伪数组转化为真实的数组，此处有多种方法转化，可以用 ES6 的 Array.from() 方法，也可以像此处一样，用 slice 方法，再用 call() 或 apply() 方法指向要转化的伪数组。
+            return this.str.replace(/\{(\d+)\}/g,function(a,b,c,d){ // 此处用到了字符串的 replace() 方法，第二个参数采用了函数的方式，这样可以实现更加精细的替换操作。
+                // 1. 在只有一个匹配项(即与模式匹配的字符串)的情况下，这个函数有 3 个参数，依次是：模式的匹配项，模式匹配项在字符串中的位置，原始字符串。
+                // 2. 在正则表达式中定义了多个捕获组的情况下，参数依次是：模式的匹配项、第一个捕获组的匹配项、第二个捕获组的匹配项。。。，但最后两个参数仍然是 模式的匹配项在字符串中的位置以及原始字符串。【显然，此处是第二种情况】 
+                console.log('a:',a);
+                console.log('b:',b);
+                console.log('c:',c);
+                console.log('d:',d);
+                /*  a: {0}
+                    b: 0
+                    c: 12
+                    d: <p><a href="{0}">{1}</a><span>{2}</span></p>
+                    a: {1}
+                    b: 1
+                    c: 17
+                    d: <p><a href="{0}">{1}</a><span>{2}</span></p>
+                    a: {2}
+                    b: 2
+                    c: 30
+                    d: <p><a href="{0}">{1}</a><span>{2}</span></p> */
+                return arg[b]|| "";
+            })
+        }
+        window.fn = fn;
+    })(window);
+
+    // use
+    (function(){
+        var t = new fn('<p><a href="{0}">{1}</a><span>{2}</span></p>');
+        console.log(t.format('http://www.alibaba.com', 'Alibaba', 'Welcome')); // <p><a href="http://www.alibaba.com">Alibaba</a><span>Welcome</span></p>
+    })();
+
+
+
+    function htmlEscape(text){
+        return text.replace(/[<>"&]/g, function(match, pos, originalText){ // 【此处是上述函数参数的第一种情况】
+            console.log('match:',match);
+            console.log('pos:',pos);
+            /*  match: <
+                pos: 0
+                match: "
+                pos: 9
+                match: "
+                pos: 18
+                match: >
+                pos: 19
+                match: <
+                pos: 32
+                match: >
+                pos: 35 */
+            switch(match){
+                case "<":
+                    return "&lt;";
+                case ">":
+                    return "&gt;";
+                case "&":
+                    return "&amp;";
+                case "\"":
+                    return "&quot;";
+            }
+        });
+    }
+    console.log(htmlEscape("<p class=\"greeting\">Hello world!</p>")); // &lt;p class=&quot;greeting&quot;&gt;Hello world!&lt;/p&gt;
+
+
+    </script>
+</body>
+</html>

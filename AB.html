@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var a;
+        var b;
+        function test(){
+            console.log('test(this):',this) // test(this): Window {parent: Window, opener: null, top: Window, length: 0, frames: Window, …}
+            function box(){
+                a = 1;
+                b = 2;
+                console.log('box(this):',this) // box(this): Window {parent: Window, opener: null, top: Window, length: 0, frames: Window, …}
+            }
+            box()
+        }
+        test()
+        console.log('a:',a) // a: 1
+        console.log('b:',b) // b: 2    
+    </script>
+</body>
+</html>

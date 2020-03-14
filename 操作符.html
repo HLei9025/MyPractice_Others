@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>操作符</title>
+</head>
+<body>
+    
+    <script>
+        // 一元操作符
+    var age = 20;
+    var age1 = 5;
+
+    // ++age;
+    // age++;
+
+    /* var newAge = ++age + age1;
+    var newAge1 = age + age1;
+    console.log('age:',age); // 21
+    console.log('newAge:',newAge); // 26
+    console.log('newAge1:',newAge1); // 26  */
+
+    var newAge = age++ + age1;
+    var newAge1 = age + age1;
+    console.log('age:',age); // 21
+    console.log('newAge:',newAge); // 25
+    console.log('newAge1:',newAge1); // 26 
+    
+    var str = 'hello';
+    var str1 = '500';
+    var str2 = '001000'
+    str++;
+    str1++;
+    str2++;
+    console.log('str:',str) // NaN
+    console.log('str1:',str1) // 501
+    console.log('str2:',str2) // 1001
+
+    var a = true;
+    // a++;
+    // a = +a;
+    a = -a;
+    console.log('a:',a)
+
+    var num = 0;
+    outermost:
+    for(var i = 0; i < 10; i++){
+        for(var j = 0; j < 10; j++){
+            if(i == 5 && j == 5){
+                continue outermost; // j 为 5 的时候，跳出了 i 为 5 的这次循环，开始 i 为 6 了，所以在 i 为 5 的时候内部的循环少了 5 次；
+            }
+            num++;
+        }
+    }
+    console.log('num:',num); // 最终打印的结果是 95 ；
+
+    
+    
+    </script>
+</body>
+</html>

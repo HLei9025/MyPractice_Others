@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>字符串方法</title>
+    <style>
+    #drawing{
+        width: 500px;
+        height: 500px;
+        background-color: #666;
+    }
+    </style>
+</head>
+<body>
+    <canvas id="drawing"></canvas>
+    
+    <script>
+
+        var drawing = document.getElementById("drawing");
+        if(drawing.getContext){
+            console.log('ok');
+        }
+
+        /*
+        得到某字符在一长串字符串中所有的位置；
+        1.可以用字符串的方法 indexOf() 巧用开始查找的参数进行遍历；
+        2.也可以用字符串方法 split() 把字符串转化为数组之后，再用数组的遍历，查找字符的位置。
+        */
+
+
+        var stringValue = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit';
+        var positions = new Array();
+        var pos = stringValue.indexOf('e');
+
+        while(pos > -1){
+            positions.push(pos);
+            pos = stringValue.indexOf('e', pos + 1);
+        }
+
+        console.log('positions:', positions); // positions: (5) [3, 24, 32, 35, 52]
+    
+
+        /* var stringValue = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit';
+        var stringArr = stringValue.split('');
+        // console.log('stringArr:',stringArr)
+        var iArr = [];
+        stringArr.forEach((item, index) => {
+            if(item == 'e'){
+                iArr.push(index);
+            }
+        })
+        console.log('iArr:',iArr) // iArr: (5) [3, 24, 32, 35, 52] */
+
+    </script>
+</body>
+</html>

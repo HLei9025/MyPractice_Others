@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+
+    <script>
+        var arr2 = [11, 22, 33, 44]
+        for (var i in arr2) {
+            console.log('i:', i)
+        }
+
+        var arr = [{
+                regulationsId: 5172,
+                title: "测试111标题2 ",
+                type: 610,
+                state: 1,
+                createdTime: 1530152467000
+            },
+            {
+                regulationsId: 5169,
+                title: "测试111标题",
+                type: 610,
+                state: 1,
+                createdTime: 1530085573000
+            },
+            {
+                regulationsId: 5170,
+                title: "测试123标题",
+                type: 609,
+                state: 1,
+                createdTime: 1530085687000
+            },
+            {
+                regulationsId: 5171,
+                title: "测试1122标题",
+                type: 608,
+                state: 1,
+                createdTime: 1530085750000
+            }
+        ];
+
+        let obj = {}
+        let typeList = []
+
+        arr.forEach(item => {
+            let type = item.type
+            
+            if(typeList.indexOf(type) == -1){
+                typeList.push(type)
+            }
+            // typeList = [...new Set(typeList)]
+
+            if (obj[type]) {
+                obj[type].push(item)
+            } else {
+                obj[type] = [item]
+            }
+        })
+        console.log('obj:', obj)
+        console.log('typeList:',typeList)
+
+        let arr3 = [{name: ['zs','ls','ww']},{name: ['11','22','33']},{name: ['aa','bb','cc']}]
+        
+        let newArr = arr3.map(i => {
+            return i.name.map(j => {
+                return {name: j}
+            })
+        })
+        console.log('newArr:',newArr)
+
+    </script>
+</body>
+
+</html>
