@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var countAndSay = function (n) {
+            let res = '1';
+            for (let i = 1; i < n; i++) {
+                res = res.replace(/(\d)\1*/g, item => `${item.length}${item[0]}`);
+            }
+            return res;
+        };
+
+        let s = 'aaaabbcccdddddaa';
+        let str = s.replace(/(\w)\1*/g, function (m, p1, i, str) {
+            console.log('m:', m);
+            console.log('p1:', p1);
+            console.log('i:', i);
+            console.log('str:', str);
+        })
+
+        var sss = 'Is is the cost of of gasoline going up up';
+        var patt1 = /\b([a-z]+) \b\1/ig;
+        document.write(sss.match(patt1));
+        console.log(sss.match(patt1))
+
+        var lengthOfLastWord = function (s) {
+            let sArr = s.match(/\b\w+/g)
+            console.log('sArr:',sArr)
+        };
+        lengthOfLastWord(sss)
+    </script>
+</body>
+
+</html>
