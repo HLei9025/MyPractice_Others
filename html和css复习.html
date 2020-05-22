@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html相关练习</title>
+    <style>
+        p.small {
+            font-variant: small-caps
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: aquamarine;
+            padding: 10px;
+            border: 1px solid #000;
+            margin: 10px;
+        }
+
+        .parent {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #000;
+
+            text-align: center;
+        }
+
+        .children {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .brother {
+            display: inline-block;
+            vertical-align: middle;
+            width: 0;
+            height: 100%;
+        }
+
+        .sticky {
+            position: sticky;
+            top: 0px;
+            padding: 5px;
+            background-color: #cae8ca
+        }
+
+        .pox {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #000;
+            position: relative;
+        }
+
+        .sub {
+            background-color: brown;
+            text-align: center;
+            width: 100px;
+            height: 100px;
+            /* position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto; */
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            /* margin: -50px 0 0 -50px; */
+            transform: translate(-50%, -50%);
+
+        }
+
+        #tip {
+            background-color: burlywood;
+        }
+
+        .flexbox {
+            display: flex;
+            width: 330px;
+            height: 100px;
+            border: 1px solid #000;
+            flex-wrap: wrap;
+            align-content: center;
+        }
+
+        .con1 {
+            background-color: burlywood;
+        }
+
+        .con2 {
+            background-color: cadetblue;
+            order: 1;
+        }
+
+        .con3 {
+            background-color: chartreuse;
+        }
+        .more-column{
+            width: 500px;
+            height: 500px;
+            border: 1px solid #000;
+            padding: 20px;
+            /* box-sizing: border-box; */
+            /* column-width: 70px; */
+            column-count: 4;
+            overflow: auto;
+        }
+        .tran{
+            width: 200px;
+            height: 200px;
+            border: 1px solid #333;
+            background-color: aquamarine;
+        }
+        .tran:hover{
+            /* transform: translate(200px); */
+            transform: rotate(45deg);
+            transition: all 2s;
+        }
+        .anim{
+            width: 200px;
+            height: 200px;
+            background-color: burlywood;
+            border: 1px solid #333;
+            animation: rotateAnim 3s infinite;
+        }
+        @keyframes rotateAnim {
+            from{
+                background-color: burlywood;
+                transform: rotate(0);
+            }
+            to{
+                background-color: red;
+                transform: rotate(360deg);
+            }
+        }
+        .pix{
+            width: 100%;
+            height: 1.173333rem;
+            background: brown; 
+        }
+    </style>
+    <script src="./flexible.js"></script>
+</head>
+
+<body>
+    <a href="#tip">点我跳到命名锚点</a>
+    <ul type="a">
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+    </ul>
+    <ol type="a">
+        <li>111</li>
+        <li>222</li>
+        <li>333</li>
+    </ol>
+    <table width="100px" height="50px" border="1px" bordercolor="red" bgcolor="#999" cellspacing="0" cellpadding="10"
+        align="center" valign="middle">
+        <tr align="center" valign="middle">
+            <td rowspan="2"></td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+
+            <td colspan="2">3</td>
+
+        </tr>
+    </table>
+    <div id="tip">命名锚点</div>
+    <u>123456</u>
+    <p class="small">This is a paragraph</p>
+    <div class="box">box</div>
+    <span>666</span>
+
+    <div class="parent">
+        <div class="children"></div>
+        <span class="brother"></span>
+    </div>
+
+    <div class="sticky">我是粘性定位!</div>
+    <div style="padding-bottom:1000px">
+        <p>滚动我</p>
+    </div>
+
+    <div class="pox">
+        <div class="sub">sub</div>
+    </div>
+
+    <form>
+        <fieldset disabled="disabled">
+            <legend>健康情况</legend>
+            身高: <input type="text" /><br />
+            体重: <input type="text" /><br />
+        </fieldset>
+    </form>
+
+    <input type="image" src="" width="100" height="100" alt="上传图片" />
+
+    文件域：<input type="file" multiple="multiple" />
+
+    <select>
+        <optgroup label="西安">
+            <option>雁塔区</option>
+            <option>灞桥区</option>
+            <option>高新区</option>
+        </optgroup>
+    </select>
+
+    <form oninput="out.value=parseInt(a.value)+parseInt(b.value)">
+        "0"
+        <input type="range" id="a" value="50">
+        "100"
+        <input type="number" id="b" value="50">
+        "="
+        <output name="out" for="a b">
+            "120"
+        </output>
+    </form>
+
+    <input id="mycity" list="city" />
+    <datalist id=”city ”>
+        <option value="1">上海</option>
+        <option value="2">北京</option>
+        <option value="3">武汉</option>
+    </datalist>
+    <br />
+    <br />
+
+    <div class="flexbox">
+        <div class="con1">con1con1con1con1</div>
+        <div class="con2">con2con2con2con2</div>
+        <div class="con3">con3con3con3con3</div>
+    </div>
+
+    <div class="more-column">
+        池塘里的一只青蛙被人捉住后放置在温水缸里，舒适的环境让它欣喜不已，不用躲避风雨的侵袭，不必担心阳光的炙烤，它心安理得的沉溺于温暖的水中，梦想早已抛诸脑后，它轻盈的身躯变得臃肿不堪、灵活的双脚变得笨拙，直到有一天，它意识到自己即将成为人类的盘中餐，于是后悔万分。
+
+        　　它思念池塘里的泥泞、荷叶和伙伴，向往驰骋于天地间的无拘无束，痛定思痛之后，它开始了跳跃，一次次艰难的尝试之后，终于蹦出了水缸，重新捡起了属于一只青蛙的梦想，尽管前途未卜，但是作为一只跳出温水的青蛙，它已经不同凡响了。
+
+        　　关于梦想，从小时候的豪言壮语到现世的知足常乐，人生的种种遭际将孩子们的英雄梦、公主梦无情地击碎，所以我们的梦想变得越来越小，从科学家、文学家到律师、教师，再到为房贷、车贷、生计而奔波的渺小的蚁族。当那个叫梦想的东西从我们的世界里消失，便会无奈、颓废地说一声：“谈梦想太奢侈了。”然后对那些执着地坚守自己梦想的人嗤之以鼻。
+
+        　　如果不是我们嘲笑的那个人已经长成了一棵参天大树，如果不是人生突遭变故、如果不是感受到岁月匆匆，有谁会痛下决心捡起曾经的梦想。
+
+        　　树立梦想也许是随口一说，也许是深思熟虑，但是重拾梦想需要何等的勇气与决然，抛掉安逸、戒掉拖延、摒弃惰性，那意味着一次脱胎换骨的成长。
+
+        　　努力，任何时候都不晚。
+
+        　　重拾梦想，从打破原先舒适的生活方式开始。重拾梦想是崭新人生的开始，梦想的实现需要积极有效的行动，因此，我们必须毅然与此刻安逸的生活告别，行动力是开启崭新人生的第一步，重新起步的过程真的很难，但是，努力了，人生还有一线希望，原地踏步，就什么也不会有。
+
+        　　破旧立新，打破旧的生活习惯与思维模式，建立新的人生秩序，建构阶梯式的成长发展规划，脚踏实地，从踏上第一级台阶开始，一步一步攀升到梦想的巅峰。
+
+        　　重拾梦想，就要把他人的眼光、世俗的偏见抛到九霄云外。重拾梦想的人比起初涉职场的新人存在许多劣势，技艺已经生疏、已不再年轻、柴米油盐仍需要操心，但是这些小青年口里的大叔、阿姨对自己狠起来是旁人所不及的，因为有过惨痛的经历、因虚度的年华而悔恨过、懂得明白笨鸟先飞的道理，他们会抓住一切可以提升自我的机会苦练技能、钻研业务，就像抓住最后一根稻草。
+
+        　　上高三时，班上转来一个新同学，是一个三十多岁的女人，她准备和我们一起参加高考，当她被同学们团团围住，她没有不好意思，而是落落大方地向我们诉说着她的大学梦，年轻时，为了减轻家里的负担，本想考大学的她顶替父亲在煤矿上班，现在，家境好了，单位可以脱产学习，梦想再一次燃起，家人说：“都是孩子妈了，瞎折腾什么”，在同事眼里她是别样的存在，但是她还是毫不犹豫地拿起了书本，她向比她小的学生提问，她和同学们一起住在集体宿舍里。
+    </div>
+
+    <br>
+    <div class="tran"></div>
+
+    <br>
+    <div class="anim"></div>
+
+    <br>
+    <br>
+
+    <div class="pix">nav</div>
+</body>
+
+</html>

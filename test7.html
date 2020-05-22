@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+
+    <script>
+    
+    function callback1(){console.log('111')}
+    function callback2(){console.log('222')}
+    function callback3(){console.log('333')}
+    
+    const myEvent = new Event();
+    myEvent.on('click', callback1)
+    myEvent.on('click', callback2)
+    myEvent.once('click', callback3)
+
+    myEvent.emit('click')//一次输出111，222，333
+    myEvent.off('click', callback1)
+    myEvent.emit('click')//输出222
+
+    function Event(){
+
+    }
+    Event.prototype.on = function(eventType, callbackFn){
+
+    }
+    Event.prototype.off = function(eventType, callbackFn){
+        
+    }
+    Event.prototype.emit = function(){
+        
+    }
+    Event.prototype.once = function(eventType, callbackFn){
+        
+    }
+    
+    
+    
+    </script>
+</body>
+</html>

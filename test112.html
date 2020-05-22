@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <style>
+    .container {
+    margin-left: 120px;
+    margin-right: 220px;
+}
+.main {
+    float: left;
+    width: 100%;
+    height:300px;
+    background: green;
+}
+.left {
+    position: relative;
+    left: -120px;
+    float: left;
+    height: 300px;
+    width: 100px;
+    margin-left: -100%;
+    background: red;
+}
+.right {
+    position: relative;
+    right: -220px;
+    float: right;
+    height: 300px;
+    width: 200px;
+    margin-left: -200px;
+    background: blue;
+} 
+    
+    </style>-->
+</head>
+
+<body>
+    <!-- <div class="container">
+        <div class="main"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+     -->
+
+
+    <script>
+        // function fibo(n){
+        //     if(n <= 0){
+        //         return -1;
+        //     }
+        //     if(n <= 2){
+        //         return 1;
+        //     }
+        //     var a = 1;
+        //     var b = 1;
+        //     for(var i = 0;i < n-2;i++){
+        //         var temp = a;
+        //         a = b;
+        //         b = temp + b;
+        //     }
+        //     return b;
+        // }
+        // console.log(fibo(9));
+
+
+
+        // var a = ['a','b','c'];
+        // var b = [...a];
+        // a[1] = 'e';
+        // console.log(a);
+        // console.log(b);
+        // console.log(a === b);
+
+        // function Parent() {
+        //     this.name = 'wang';
+        // }
+
+        // function Child() {
+        //     this.age = 28;
+        // }
+
+        // Child.prototype = new Parent(); //继承了Parent，通过原型
+
+        // var demo = new Child();
+        // alert(demo.age);
+        // alert(demo.name); //得到被继承的属性
+
+        // var parentObj = {
+        //     name: 'xm',
+        //     age: 25,
+        //     friends: ['xw', 'xh', 'xz'],
+        //     showName: function () {
+        //         alert(this.name);
+        //     }
+        // }
+        // // 创建需要继承的子对象
+        // var childObj = {};
+        // // 开始拷贝属性(浅拷贝)
+        // for (var i in parentObj) {
+        //     console.log(i)
+        //     childObj[i] = parentObj[i];
+        // }
+        // // parentObj.friends.push('xf');
+        // console.log(childObj);
+        // console.log(parentObj);
+
+        // var str = 'dsad7sd4ad6sa2dfas';
+        // var reg = /\d/g;
+        // console.log(reg.exec(str));
+
+        // var a = {n: 1};
+
+        // var b = a;  
+
+        // a.x = a = {n: 2};
+
+        // console.log(a);
+        // console.log(a.x)
+        // console.log(b);
+        // console.log(b.x);
+
+        let a = 1;
+        function change(){
+            a = 2;
+            console.log(a);
+        }
+        change();
+        console.log(a);  
+
+
+
+    </script>
+</body>
+
+</html>

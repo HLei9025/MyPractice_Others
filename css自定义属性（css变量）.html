@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div:target p {
+            background: red;
+        }
+
+        @media (any-hover:none) {
+            body::before {
+                content: 'hoverNone';
+                display: none;
+            }
+        }
+
+        :root {
+            --mode: 'unknown';
+            --base-color: #f345f3;
+        }
+
+        .box {
+            color: var(--base-color);
+        }
+
+        .pox {
+            background-color: var(--base-color);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --mode: 'dark';
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --mode: 'light';
+            }
+        }
+
+        .day {
+            background: #eee;
+            color: black;
+        }
+
+        .night {
+            background: #333;
+            color: white;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .day.dark-scheme {
+                background: #333;
+                color: white;
+            }
+
+            .night.dark-scheme {
+                background: black;
+                color: #ddd;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .day.light-scheme {
+                background: white;
+                color: #555;
+            }
+
+            .night.light-scheme {
+                background: #eee;
+                color: black;
+            }
+        }
+
+        .day,
+        .night {
+            display: inline-block;
+            padding: 1em;
+            width: 7em;
+            height: 2em;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">我是一个box</div>
+    <div class="pox">我是一个pox</div>
+
+    <a href="#p1">吕布</a>
+    <a href="#p2">赵云</a>
+    <a href="#p3">典韦</a>
+    <div id="p1">
+        <p>太猛了！</p>
+    </div>
+    <div id="p2">
+        <p>太帅了！</p>
+    </div>
+    <div id="p3">
+        <p>太凶了！</p>
+    </div>
+
+    <div class="day">Day (initial)</div>
+    <div class="day light-scheme">Day (changes in light scheme)</div>
+    <div class="day dark-scheme">Day (changes in dark scheme)</div> <br>
+
+    <div class="night">Night (initial)</div>
+    <div class="night light-scheme">Night (changes in light scheme)</div>
+    <div class="night dark-scheme">Night (changes in dark scheme)</div>
+
+
+
+    <p class="pp"></p>
+
+
+    <script>
+        var pp = document.querySelector('.pp');
+        for (var i = 0; i < 50; i++) {
+            let num = i;
+            pp.innerHTML += `<p>${num}</p>`
+        }
+
+        var strContent = getComputedStyle(document.body, '::before').content
+        console.log('strContent:', strContent)
+
+        var mode = getComputedStyle(document.documentElement).getPropertyValue('--mode').trim();
+        console.log('mode:', mode)
+
+        console.log('CSSMediaRule:', CSSMediaRule)
+    </script>
+</body>
+
+</html>

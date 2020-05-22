@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组去重的多种方法</title>
+</head>
+<body>
+    <!-- 
+       【数组去重：总结了4个方法】
+        1. 建一个新数组，遍历目标数组，如果其元素在新数组有，则不添加到新数组，否则添加到新数组
+        2. 利用 indexOf() 方法进行数组去重
+        3. set 和 Array.from 配合用
+        4. 扩展运算符 ... 和 set 配合用
+     -->
+
+    <script>
+        // 1. 建一个新数组，遍历目标数组，如果其元素在新数组有，则不添加到新数组，否则添加到新数组
+        function noRepeat(arr){
+            var newArr = [];
+            arr.forEach(item => {
+                if(!hasNumInArr(newArr, item)){
+                    newArr.push(item);
+                }
+            });
+            // 也可以用 for 循环
+            // for(let i = 0; i < arr.length; i++){
+            //     if(!hasNumInArr(newArr, arr[i])){
+            //         newArr.push(arr[i]);
+            //     }
+            // }
+            return newArr;
+        }
+        function hasNumInArr(arr, num){
+            return arr.some(item => {
+                return item === num
+            })
+            // 也可以用 for 循环
+            // for(let i = 0; i < arr.length; i++){
+            //     if(arr[i] === num){
+            //         return true;
+            //     }
+            // }
+            // return false;
+        }
+        var arr = [34,4,78,4,2,31,23,6,2,31];
+        console.log(noRepeat(arr)); // [34, 4, 78, 2, 31, 23, 6]
+
+
+        // 2. 利用 indexOf() 方法进行数组去重
+        function noRepeat1(arr){
+            var newArr = [];
+            arr.forEach(item=>{
+                if(newArr.indexOf(item) == -1){
+                    newArr.push(item);
+                }
+            })
+            // 也可以用 for 循环
+            // for(let i = 0; i < arr.length; i++){
+            //     if(newArr.indexOf(arr[i]) == -1){
+            //         newArr.push(arr[i]);
+            //     }
+            // }
+            return newArr;
+        }
+        console.log(noRepeat1(arr)); // [34, 4, 78, 2, 31, 23, 6]
+
+
+        // 3. set 和 Array.from 配合用
+        let set = new Set(arr);
+        let newArr = Array.from(set);
+        console.log('newArr:', newArr); // newArr: (7) [34, 4, 78, 2, 31, 23, 6]
+
+
+        // 4. 扩展运算符 ... 和 set 配合用
+        var newArr1 = [...new Set(arr)];
+        console.log('newArr1:', newArr1); // newArr1: (7) [34, 4, 78, 2, 31, 23, 6]
+        
+    </script>
+</body>
+</html>

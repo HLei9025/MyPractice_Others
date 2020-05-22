@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class App {
+            sex = 'men';
+            constructor() {
+                this.name = 'ls';
+                this.age = 30
+                this.tiao = function () {
+                    console.log(this.age)
+                }
+            }
+            pao() {
+                console.log(this.name)
+            }
+            static aaa() {
+                console.log('hello')
+            }
+            ttt() {
+                console.log(this.sex)
+            }
+        }
+
+        class Abb extends App {
+            constructor() {
+                super()
+            }
+        }
+
+        const box = new App();
+        const pox = new Abb();
+
+        console.log(box.name)
+        console.log(box.age)
+        // console.log(box.sex)
+        box.pao()
+        box.tiao()
+
+        console.log(pox.name)
+        console.log(pox.age)
+        pox.pao()
+        pox.tiao()
+        // console.log(pox.sex)
+
+        App.aaa()
+        Abb.aaa()
+
+        console.log(App.sex)
+        box.ttt()
+
+
+        let obj = {
+            a: '1',
+            b: '2'
+        }
+        let oArr = Object.entries(obj)
+        console.log(oArr)
+        let k = Object.keys(obj)
+        let v = Object.values(obj)
+        console.log(k)
+        console.log(v)
+    </script>
+</body>
+
+</html>

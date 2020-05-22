@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>解构赋值</title>
+</head>
+
+<body>
+    <script>
+        // 解构数组
+        // 变量声明时的解构
+        var foo = ["1", "2", "3"];
+        var [one, two, three] = foo;
+        console.log(one); // 1
+        console.log(two); // 2
+        console.log(three); // 3
+        // 先声明，后赋值
+        var a, b;
+        [a, b] = [1, 2];
+        console.log(a); // 1
+        console.log(b); // 2
+        // 默认值
+        var c, d;
+        [c = 3, d = 4] = [5];
+        console.log(c); // 5
+        console.log(d); // 4
+        // 交换变量
+        var e = 1;
+        var f = 2;
+        [e, f] = [f, e];
+        console.log(e); // 2
+        console.log(f); // 1
+        // 解析一个从函数返回的数组
+        function fn() {
+            return [1, 2];
+        }
+        // var m, n;
+        var [m, n] = fn();
+        console.log(m);
+        console.log(n);
+        // 用正则表达式匹配提取值
+        function parseProtocol(url) {
+            var parseURl = /^(\w+)\:\/\/([^\/]+)\/(.*)$/.exec(url);
+            if (!parseURl) {
+                return false;
+            }
+            console.log(
+                parseURl); // ["https://developer.mozilla.org/en-US/Web/JavaScript", "https", "developer.mozilla.org", "en-US/Web/JavaScript"]
+            var [, protocol, fullhost, fullpath] = parseURl;
+            return protocol;
+        }
+        console.log(
+            parseProtocol(
+                "https://developer.mozilla.org/en-US/Web/JavaScript"
+            )
+        ); // https
+
+        // 解构对象
+        // 基本赋值
+        var o = {
+            p: 43,
+            q: true
+        };
+        var {
+            p,
+            q
+        } = o;
+        console.log(p); // 43
+        console.log(q); // true
+        // 无声明赋值
+        var h, j;
+        ({
+            h,
+            j
+        } = {
+            h: 1,
+            j: 2
+        });
+        console.log(h); // 1
+        console.log(j); // 2
+        // 给新的变量名赋值
+        var ob = {
+            p: 32,
+            q: true
+        };
+        var {
+            p: foo,
+            q: bar
+        } = ob;
+        console.log(foo); // 32
+        console.log(bar); // true
+        // 默认值
+        var {
+            y = 10, u = 5
+        } = {
+            y: 6
+        };
+        console.log(y); // 6
+        console.log(u); // 5
+        // 给新的变量命名并提供默认值
+        var {
+            s: ss = 10,
+            x: xx = 7
+        } = {
+            s: 5
+        };
+        console.log(ss); // 5
+        console.log(xx); // 7
+
+        function drawES5Chart(options) {
+            options = options === undefined ? {} : options;
+            var size = options.size === undefined ? "big" : options.size;
+            var cords =
+                options.cords === undefined ?
+                    {
+                        x: 0,
+                        y: 0
+                    } :
+                    options.cords;
+            var radius = options.radius === undefined ? 25 : options.radius;
+            console.log(size, cords, radius);
+            // now finally do some chart drawing
+        }
+
+        drawES5Chart({
+            cords: {
+                x: 18,
+                y: 30
+            },
+            radius: 30
+        });
+
+        function drawES2015Chart({
+            size = "big",
+            cords = {
+                x: 0,
+                y: 0
+            },
+            radius = 25
+        } = {}) {
+            console.log(size, cords, radius);
+            // do some chart drawing
+        }
+
+        drawES2015Chart({
+            cords: {
+                x: 18,
+                y: 30
+            },
+            radius: 30
+        });
+
+        var people = [{
+            name: "Mike Smith",
+            family: {
+                mother: "Jane Smith",
+                father: "Harry Smith",
+                sister: "Samantha Smith"
+            },
+            age: 35
+        },
+        {
+            name: "Tom Jones",
+            family: {
+                mother: "Norah Jones",
+                father: "Richard Jones",
+                brother: "Howard Jones"
+            },
+            age: 25
+        }
+        ];
+
+        //    var ooo = {id:1,name:'zs'}
+        // for (var item of people) {
+        for (var {
+            name: n,
+            family: {
+                father: f
+            }
+        } of people) {
+            // console.log(item)
+            console.log("Name: " + n + ", Father: " + f);
+            // Name: Mike Smith, Father: Harry Smith
+            // Name: Tom Jones, Father: Richard Jones
+        }
+
+        let {
+            t,
+            z,
+            ...rest
+        } = {
+            t: 10,
+            z: 20,
+            r: 30,
+            w: 40
+        };
+        console.log(t); // 10
+        console.log(z); // 20
+        console.log(rest); // {r: 30, w: 40}
+    </script>
+</body>
+
+</html>

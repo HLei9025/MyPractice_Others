@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper {
+            width: 300px;
+            height: 300px;
+            background-color: aquamarine;
+            /* display: flex;
+            justify-content: center;
+            align-items: center; */
+            position: relative;
+        }
+
+        .middle {
+            width: 200px;
+            height: 200px;
+            background-color: bisque;
+            /* display: flex;
+            justify-content: center;
+            align-items: center; */
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .inner {
+            width: 100px;
+            height: 100px;
+            background-color: brown;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -50px 0 0 -50px;
+        }
+
+        
+
+        
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        外层
+        <div class="middle">
+            中间
+            <div class="inner">内层</div>
+        </div>
+    </div>
+
+
+    
+
+    <script>
+        var wrapper = document.querySelector('.wrapper');
+        var middle = document.getElementsByClassName('middle');
+        var inner = document.querySelector('.inner');
+        wrapper.onclick = function (e) {
+            // console.log('e:',e)
+            // console.log('this:',this)
+            // var value1 = this.innerText;
+            // console.log(value1);
+            console.log('外层');
+        }
+        // wrapper.onclick = function(){
+        //     console.log(666)
+        // }
+        // console.log('middle:',middle)
+
+        // middle[0].onclick = function(){
+        //     // var value2 = this.innerText;
+        //     // console.log(value2);
+        //     console.log('中间层');
+        // }
+        // inner.onclick = function(e){
+        //     e.stopPropagation();
+        //     // var value3 = this.innerText;
+        //     // console.log(value3);
+        //     console.log('内层');
+        // }
+        // console.log(inner.addEventListener)
+        // console.log(inner.attachEvent) // undefined
+        inner.addEventListener('click', function (...rest) {
+            // console.log('rest:',rest);
+            // console.log('this:',this)
+            console.log('我是最内层元素，存在冒泡')
+        })
+        middle[0].addEventListener('click', function () {
+            // console.log('this:',this)
+            console.log('我是中间元素，捕获')
+        }, true)
+        middle[0].addEventListener('click', function () {
+            console.log('我是中间元素，冒泡')
+        })
+
+        
+
+        
+    </script>
+</body>
+
+</html>
