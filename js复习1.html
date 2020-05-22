@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js复习1</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app" onmouseover="console.log(6)">
+        <p>我是一个p</p>
+    </div>
+    <h3 id="time"></h3>
+    <button id="btn">refresh</button>
+    <div class="box"></div>
+    <button id="cli">click</button>
+
+
+    <script>
+        console.time('⏲');
+        var a = 1;
+        // function fn () {
+        //     b = 2;
+        // }
+        // console.log('b:',b) // Uncaught ReferenceError: b is not defined
+        for (let i = 0; i < 10; i++) {
+            e = i;
+
+        }
+        console.log('e:', e) // 9
+        // alert(parseInt("101010101",2));
+
+        for (let i = 0; i < 100; i++) {
+            if (i % 3 == 0 && i % 7 == 0) {
+                document.write(i + " ");
+            }
+        }
+
+        function num(n) {
+            if (n < 0) {
+                return;
+            } else if (n % 3 == 0 && n % 7 == 0) {
+                document.write("<br>" + n);
+            }
+            n--;
+            num(n);
+        }
+        num(100);
+
+        for (let i = 1; i < 100; i++) {
+            if (i % 5 == 0) {
+                break;
+            }
+            document.write("<br>" + i);
+        }
+
+        for (let i = 1; i < 100; i++) {
+            var mm = '可以看到我吗';
+            if (i == 1) {
+                document.write('<br>');
+            } else if (i % 5 == 0 || i % 2 == 0) {
+                continue;
+            }
+            document.write(' ' + i);
+        }
+
+        var m = 0;
+        while (m < 10) {
+            // if(m % 2 == 1){
+            //     continue; // 不好使
+            // }
+            document.write(m + ' ');
+            m++;
+        }
+
+        console.log('i:', i)
+        console.log('mm:', mm)
+
+        for (var i = 0; i < 10; i++) {
+            if (i % 2 == 1) {
+                continue;
+            }
+            document.write(' ' + i)
+        }
+        console.log('i::', i)
+
+        document.write('<br>');
+
+        document.write('<table border="1">');
+        for (let i = 0; i < 9; i++) {
+            document.write('<tr>');
+            for (j = 0; j < i + 1; j++) {
+                document.write('<td>' + (i + 1) + 'x' + (j + 1) + '=' + (i + 1) * (j + 1) + '</td>');
+            }
+            document.write('</tr>');
+        }
+        document.write('</table>');
+
+        function primeNum(num) {
+            let count = 0;
+            for (let i = 1; i <= num; i++) {
+                if (num % i == 0) {
+                    count++;
+                }
+            }
+            if (count == 2) {
+                console.log(num + '是素数');
+            } else {
+                console.log(num + '不是素数');
+            }
+        }
+        primeNum(7);
+        primeNum(10);
+
+        function feibo(month) {
+            if (month == 1 || month == 2) {
+                return 1;
+            }
+            return feibo(month - 1) + feibo(month - 2);
+        }
+        console.log(feibo(3));
+        console.log(feibo(4));
+        console.log(feibo(5));
+        console.log(feibo(6));
+        console.log(feibo(7));
+        // let feibo = 100; // Identifier 'feibo' has already been declared
+        console.log(feibo(8));
+
+        var foo = 10;
+        function foo() {
+            console.log('func')
+        }
+        // foo(); // foo is not a function
+        console.log(foo);
+
+        var app = document.getElementById('app');
+        console.log('appStyle:', app.style);
+        console.log('innerHTML:', app.innerHTML);
+        console.log('innerText:', app.innerText);
+        console.log('outerHTML:', app.outerHTML);
+
+        var o = {
+            id: 1,
+            name: 'zs'
+        }
+        console.log(o);
+        var str = '123'
+        console.log(str.length); // 3
+        var num = 1234;
+        console.log(num.length) // undefined
+
+        function ojilide(num1, num2) {
+            var r = num1 % num2;
+            if (r == 0) {
+                return num2;
+            } else {
+                return ojilide(num2, r);
+            }
+        }
+        console.log(ojilide(893, 627));
+
+        function arg() {
+            console.log('arguments:', arguments)
+        }
+
+        function father() {
+            arg();
+        }
+        father();
+
+        function outer(a) {
+            inner(11, 22);
+            function box() {
+                sonsole.log('666')
+            }
+        }
+        function inner(a, b, c) {
+            console.log(arguments);
+            console.log(arguments.callee);
+            console.log(arguments.callee.caller);
+            console.dir(arguments.callee.caller)
+            console.log(arguments.callee.caller.arguments)
+        }
+        outer(123);
+
+        var arr = [[], [], [], [], []];
+        var index = 0;
+        document.write('<table border = "1">');
+        for (let i = 0; i < 5; i++) {
+            document.write('<tr>');
+            for (let z = 0; z < 5; z++) {
+                index++;
+                arr[i][z] = index;
+                // console.log(index);
+                // console.log(arr);
+                // document.write("<td>" + index + "</td>");
+            }
+            for (let j = 0; j < i + 1; j++) {
+                document.write("<td>" + arr[i][j] + "</td>")
+            }
+            document.write('</tr>');
+        }
+        document.write('</table>');
+
+        function bubble(arr) {
+            for (var i = 0; i < arr.length - 1; i++) {
+                for (var j = 0; j < arr.length - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        // var temp = arr[j];
+                        // arr[j] = arr[j+1];
+                        // arr[j+1] = temp;
+                        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]; // 数组的解构赋值
+                    }
+                }
+            }
+            return arr;
+        }
+        var arr = [12, 23, 4, 56, 43, 2, 24, 8];
+        var abc = bubble(arr);
+        console.log('abc:', abc);
+        console.log('arr:', arr);
+        console.log(arr === abc); // true
+
+        function choseArr(arr) {
+            for (var i = 0; i < arr.length - 1; i++) {
+                index = i;
+                for (var j = i + 1; j < arr.length; j++) {
+                    if (arr[index] > arr[j]) {
+                        index = j;
+                    }
+                }
+                if (index > i) {
+                    // var temp = arr[i];
+                    // arr[i] = arr[index];
+                    // arr[index] = temp;
+                    [arr[i], arr[index]] = [arr[index], arr[i]];
+                }
+            }
+            return arr;
+        }
+        var arr2 = [45, 7, 89, 65, 36, 2, 6, 27, 32];
+        console.log(choseArr(arr2));
+
+        var arr3 = [45, 7, 89, 65, 36, 2, 6, 27, 32]
+        var vv = arr3.sort(function (a, b) {
+            console.log('a:', a, 'b:', b);
+            return a - b;
+        })
+        console.log('vv:', vv);
+
+        function test() {
+            testData = 123;
+            var test2 = 456;
+            console.log('123456')
+        }
+        test();
+        console.log('testData:', testData); // 123
+        // console.log('test2:',test2); // test2 is not defined
+
+        var arr6 = [1, 2, 3];
+        arr6.forEach((item, index, array) => {
+            console.log('item:', item, 'index:', index, 'array:', array);
+            // if(item < array[index+1]){
+            //     [array[index]] = [array[index+1]]
+            //     // array[index+1] = item;
+            // }
+            array.sort((a, b) => {
+                return b - a;
+            })
+        })
+        console.log('arr6:', arr6);
+
+        var arr8 = [1, 2, 3, 4, 5];
+        var mm = arr8.reduce((prev, next, index, array) => {
+            console.log(prev, next, index, array);
+
+            var cc = prev + next;
+            console.log('cc:', cc)
+            return cc;
+        })
+        console.log('arr8:', arr8)
+        console.log('mm:', mm)
+
+        console.log(arr8 instanceof Object); // true
+        console.log(typeof arr8); // object
+        console.log(arr8 instanceof Array); // true
+
+        var arr9 = [1, 21, 2, 201];
+        arr9.sort();
+        console.log('arr9:', arr9); // [1, 2, 201, 21]
+        var newa9 = arr9.sort((a, b) => {
+            return a - b;
+        })
+        console.log('newa9:', newa9); //  [1, 2, 21, 201]
+        console.log('arr9:', arr9) //  [1, 2, 21, 201]
+
+        var birth = '2000/12/12';
+        var birthday = new Date(birth);
+        var b = birthday.getTime();
+        console.log('b:', b)
+
+        var t = setInterval((...rest) => {
+            // console.log('rest:::',rest)
+            console.log('setInterval');
+        }, 5000)
+        console.log('t:', t);
+        var t1 = setInterval(() => {
+            console.log('this:', this)
+        }, 5000);
+        console.log('t1:', t1);
+        var t2 = setTimeout(() => {
+            console.log('this::', this);
+        }, 2000);
+        console.log('t2:', t2);
+        clearInterval(t);
+        clearInterval(t1);
+        clearTimeout(t2);
+
+        /* console.log("a");
+        console.log("b");
+        for (var i = 0; i < 10; i++) {
+            console.log(i);
+            if (i === 3) {
+                flewj;
+            }
+        }
+        console.log("c");
+        console.log("d"); */
+        document.getElementById('time').innerHTML = new Date();
+        function showTime() {
+            var d = new Date();
+            document.getElementById('time').innerHTML = d;
+        }
+        var nn = setInterval(showTime, 1000);
+
+        console.log('window:', window);
+        console.log(window.localStorage.cmts);
+        console.log(location.href);
+
+        document.getElementById('btn').onclick = function () {
+            history.go(0);
+        }
+
+        if (true) {
+            const A = 3;
+            let bb = 4;
+        }
+        // console.log('A:',A);// Uncaught ReferenceError: A is not defined
+        // console.log('bb:',bb); // Uncaught ReferenceError: bb is not defined
+
+        var set1 = new Set([11, 22, 33, 44]);
+        var k = set1.keys();
+        console.log('k:', k);
+        for (const n of k) {
+            console.log('n', n)
+        }
+        var v = set1.values();
+        console.log('v:', v);
+        var ee = set1.entries();
+        console.log('ee:', ee);
+        for (const m of ee) {
+            console.log('m:', m)
+        }
+
+        var ooo = {
+            id: 1,
+            name: 'ls',
+            age: 6
+        }
+        var eooo = Object.entries(ooo);
+        console.log('eooo:', eooo);
+        let neweo = eooo.map(item => item[1]);
+        console.log('neweo:', neweo)
+
+        var map = new Map([
+            ['name', 'web'],
+            ['des', 'js']
+        ])
+        console.log(map.size);
+        console.log(map.keys());
+        console.log(map.values());
+        console.log(map.entries());
+        for (const j of map.entries()) {
+            console.log('j:', j)
+        }
+
+        let code = Math.random().toString()
+        console.log('code:', code);
+
+        console.log(app.tagName);
+        console.log(app.nodeName);
+        console.log(app.nodeType);
+        console.log(app.nodeValue);
+        console.log(app.innerText.nodeType);
+        console.log(app.childNodes);
+        console.log(app.childNodes[1]);
+        console.log(app.lastChild);
+        console.log(app.firstElementChild);
+        console.log(app.firstElementChild.childNodes[0]);
+        console.log(app.nextSibling);
+        console.log(app.nextElementSibling);
+        console.log(app.attributes);
+        var dSpan = document.createElement('span');
+        var tSpan = document.createTextNode('我是手动创建的');
+        console.log('tSpan:', tSpan);
+        console.log(tSpan.nodeType);
+        // dSpan.innerHTML = tSpan;
+        dSpan.appendChild(tSpan);
+        console.log('dSpan', dSpan);
+        app.appendChild(dSpan);
+        app.insertBefore(dSpan, app.firstElementChild);
+        app.appendChild(dSpan)
+        console.log(app.getAttribute('id'));
+        app.setAttribute('name', 'zs')
+        app.removeAttribute('name')
+
+        document.onmousedown = function (e) {
+            console.log('e.button:', e.button)
+        }
+        document.onscroll = function (...rest) {
+            console.log('rest:', rest);
+        }
+
+        var cat = document.createDocumentFragment();
+        for (let i = 0; i < 20; i++) {
+            var dLi = document.createElement('li');
+            dLi.innerHTML = `我是新来的li${i}`;
+            cat.appendChild(dLi);
+        }
+        // app.nextElementSibling.appendChild(cat);
+        console.log(document.children);
+        document.children[0].appendChild(cat);
+
+        document.onwheel = function (...rest) {
+            console.log(rest);
+        }
+
+        document.onclick = function (e) {
+            var e = e || event;
+            console.log('e.pageX:', e.pageX, 'e.pageY:', e.pageY);
+            console.log('e.clientX:', e.clientX, 'e.clientY:', e.clientY);
+            console.log('e.offsetX:', e.offsetX, 'e.offsetY:', e.offsetY);
+        }
+
+        var dBox = document.querySelector('.box');
+        console.log('dBox.style.width:', dBox.style.width);
+        console.log('dBox.offsetWidth:', dBox.offsetWidth);
+
+        let nnn = 1234;
+        nnn = 456;
+        console.log('nnn:', nnn);
+
+        // const mmm = 666;
+        // mmm = 777;
+        // console.log('mmm:',mmm);
+
+        function kkk(m, n) {
+            let arr7 = [];
+            function bbbb(m, n) {
+                if (arr7.length < m) {
+                    arr7.push(n);
+                    console.log('arr7', arr7)
+                    return bbbb(m, n);
+                }
+            }
+            bbbb(m, n);
+            return arr7;
+        }
+        // kkk(4,5);
+        console.log(kkk(4, 5));
+        // console.log(bbbb(4, 5))
+
+        function fnn(m, n) {
+            let newArr = Array.from({ length: m }, () => {
+                return n
+            })
+            return newArr;
+        }
+        console.log(fnn(6, 3));
+
+        document.querySelector('#cli').onclick = function () {
+            console.log('点击执行了')
+            clickAction();
+        }
+        function clickAction() {
+            console.log('this:', this); // window
+        }
+
+        function Person(name) {
+            this.name = name;
+            this.run();
+        }
+        Person.prototype.run = function () {
+            console.log(this.name);
+            console.log('1');
+        }
+        var tom = new Person('tom');
+        console.log('tom:', tom);
+        console.dir(tom);
+
+        class Person1 {
+            constructor(name, age, phone) {
+                this.name = name;
+                this.age = age;
+                this.phone = phone;
+            }
+            run() {
+                return `${this.name},今年${this.age}岁，他的电话是${this.phone}`
+            }
+        }
+        var catt = new Person1('张山', 17, 101);
+        console.dir(catt);
+        console.log(catt.run());
+
+        console.timeEnd('⏲');
+
+    </script>
+</body>
+
+</html>

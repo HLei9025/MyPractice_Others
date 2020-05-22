@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // function countAndSay(n){
+    //     var last = '1'
+    //     if(n <= 1){
+    //         return last
+    //     }
+    //     for(var i = 1; i < n; i++){
+    //         var str = last;
+    //         var ret = [];
+    //         for(var s = 0, sn = str.length; s < sn; s++){
+    //             var a = str[s];
+    //             if(a === ret[ret.length - 1]){
+    //                 ret[ret.length - 2]++
+    //             }else{
+    //                 ret.push(1, a)
+    //             }
+    //         }
+    //         last = ret.join('')
+    //     }
+    //     return last
+    // }
+    // console.info(countAndSay(1))    
+    // console.info(countAndSay(2))    
+    // console.info(countAndSay(3))    
+    // console.info(countAndSay(4))    
+    // console.info(countAndSay(5))    
+
+    function countNum(str){
+        let Str = str.toString();
+        let Strs = Str.split("");
+        let returnStr = [];
+        let position = 0;
+        Strs.forEach((e,i)=>{
+            if(returnStr[position]){
+                if(e === returnStr[position][0]){
+                    returnStr[position] += e;
+                }else{
+                    returnStr[++position] = e;
+                }
+            }else{
+                returnStr[position] = e;
+            }
+        })
+        console.log('returnStr:',returnStr)
+        return returnStr.map(e => `${e.length}${e[0]}`).join("");
+    }
+    console.log(countNum(1))
+    let num2 = countNum(1)
+    console.log(countNum(num2))
+    let num3 = countNum(num2)
+    console.log(countNum(num3))
+     
+    console.log(countNum(122344455)) // 1122133425
+    
+    
+    </script>
+</body>
+</html>

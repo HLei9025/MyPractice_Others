@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js复习2</title>
+    <style>
+        /* *{
+            margin: 0;
+            padding: 0;
+        } */
+        .box1 {
+            width: 200px;
+            height: 200px;
+            background-color: rosybrown;
+            border: 1px solid #333;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .pox {
+            width: 50px;
+            height: 50px;
+            background-color: royalblue;
+            display: inline-block;
+            vertical-align: middle;
+            overflow: hidden;
+        }
+
+        .pox::after {
+            content: '.';
+            width: 0;
+            height: 100%;
+            vertical-align: middle;
+            display: inline-block;
+            visibility: hidden;
+        }
+
+        .pox+span {
+            width: 0;
+            height: 100%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <input class="txt" type="text">
+        <input class="btn" type="button" value="get">
+    </div>
+    <div class="box1">
+        <div class="pox">123</div><span></span>
+    </div>
+
+    <a id="id" download="a.txt">点我</a>
+
+    <form action="">
+        <input type="text" required pattern="[A-Za-z0-9]{3,6}">
+        <input type="submit" value="get">
+        <!-- <input type="button" value="getIt"> -->
+    </form>
+
+    <button class="btnn">click</button>
+
+
+    <script>
+
+        let obj1 = {
+            a: '1',
+            b: '2',
+            c: '3'
+        }
+        console.table('obj1:', obj1);
+        let arr1 = [
+            { name: 'zds' },
+            { name: 'ger' },
+            { name: 'lsd' }
+        ]
+        console.table('arr1:', arr1);
+
+        console.time('计时器1');
+        for (var i = 0; i < 100; i++) {
+            for (var j = 0; j < 100; j++) { }
+        }
+        console.timeEnd('计时器1');
+
+        console.time('计时器2');
+        function All() {
+            // alert(1);
+            for (var i = 0; i < 10; i++) {
+                funcA(1000);
+            }
+            funcB(10000);
+        }
+
+
+        function funcA(count) {
+            for (var i = 0; i < count; i++) { }
+        }
+
+
+        function funcB(count) {
+            for (var i = 0; i < count; i++) { }
+        }
+
+        console.profile('性能分析器');
+        All();
+        console.profileEnd();
+        console.timeEnd('计时器2');
+
+        document.querySelector('.btn').onclick = function () {
+            let val = document.querySelector('.txt').value;
+        }
+        // debugger;
+        for (let i = 0; i < 10; i++) {
+            console.log(i);
+        }
+
+        function setCookie(key, value, day) {
+            if (day) {
+                let d = new Date();
+                d.setDate(d.getDate() + day);
+                let res = document.cookie = `${key}=${value};expires=${d}`;
+                // console.log('res:',res);
+            }
+        }
+        setCookie('name', 'zhangsan', 7);
+
+        let ii = 0
+        function count() {
+            ii++
+            console.log(ii)
+        }
+        setTimeout('count()', 1000);
+
+        let blob = new Blob(['hello world'], { type: 'text/plain' })
+        console.log(blob)
+        console.log(blob.size)
+        console.log(blob.slice(0, 5, 'text/plain'))
+
+        let blob2 = new Blob(['Hello world'], { type: 'text/plain' });
+        document.getElementById('id').href = URL.createObjectURL(blob2)
+
+        let g = 123;
+        let h;
+        if (true) {
+            let g = 789;
+            let h = 890;
+            console.log('g:::', g)
+        }
+        function opp() {
+            let g = 456;
+            console.log('g::', g)
+        }
+        opp();
+        console.log('g:', g)
+        console.log('h:', h)
+
+        let timer = setInterval(function () {
+            for (let iiii = 0; iiii < 10; iiii++) { // let 声明的会有块级作用域，外面访问不到
+                // console.log('i::',i)
+                // console.log('iiii:',iiii)
+            }
+            // console.log('iiii:',iiii); // Uncaught ReferenceError: iiii is not defined
+        }, 1000)
+
+        var abc = 1;
+        function f1() {
+            console.log('abc:', abc);
+        }
+        function f2() {
+            var abc = 2;
+            f1();
+        }
+        f2();
+
+        function show() {
+            console.log(this);
+        }
+        show();
+        // document.querySelector(".btnn").onclick = function () {
+        //     console.log(this);
+        //     show();
+        // }
+        document.querySelector(".btnn").onclick = show;
+        var timer1 = setTimeout(show, 1000);
+
+        function fn1() {
+            var n = 5;
+            return function fn2() {
+                n++;
+                return n;
+            }
+        }
+        var fn = fn1();
+        console.log(fn());//6
+        console.log(fn());//7
+        console.log(fn());//8
+
+        class Person {
+            constructor() {
+                this.name = 'zs'
+
+            }
+            run() {
+
+            }
+            uu = 7788
+        }
+        // console.log('uu',uu)
+        let person = new Person();
+        console.dir(Person)
+        console.log('Person:', Person)
+        console.log('person:', person)
+        console.log(person.__proto__ === Person.prototype); // true
+        function ani() {
+            console.log('99')
+        }
+        console.dir(ani)
+        let cat = new ani();
+        console.log('ani:', ani)
+        console.log('cat:', cat)
+        console.log(cat.prototype) // undefined
+
+        let strr = new String('123456')
+        console.log('strr:', strr)
+
+        var fn3 = function () { };
+        var fn4 = new Function();
+        function fn5() { };
+        console.log(fn3.prototype);
+        console.log(fn4.prototype);
+        console.log(fn5.prototype);
+        console.dir(fn3)
+        console.dir(fn4)
+        console.dir(fn5)
+        console.dir(ani)
+
+        function Cat() { };
+        var obj = Cat.prototype;// 原型对象
+        console.log(obj.constructor);//ƒ Cat() {}
+        console.dir(Cat)
+
+        let obj5 = Object.create(null)
+        console.log(obj5)
+        console.dir(obj5)
+
+
+        var obj11 = { a: 1, b: 2, c: { d: 4, e: 5 } };
+        var obj21 = Object.assign({}, obj11);
+        console.log(obj11.c === obj21.c); // true
+
+
+
+
+
+
+    </script>
+    <script id="worker" type="app/worker">
+            addEventListener('message', function () {
+                postMessage('some message');
+          }, false);
+    </script>
+    <script>
+        var blob1 = new Blob([document.querySelector('#worker').textContent]);
+        console.log('blob1:', blob1);
+        var url = window.URL.createObjectURL(blob1);
+        console.log('url:', url);
+        var worker = new Worker(url);
+        console.log('worker:', worker);
+        worker.onmessage = function (e) {
+            console.log('e', e.data);
+        }
+        worker.postMessage('init')
+    </script>
+</body>
+
+</html>

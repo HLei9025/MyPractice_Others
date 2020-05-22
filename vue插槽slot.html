@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <child-comp></child-comp>
+        <exap-slot>
+            <template v-slot:slot1="getProps">
+                <ul>
+                    <li v-for="item in getProps.user">
+                        {{item.id}}---{{item.name}}
+                    </li>
+                </ul>
+            </template>
+            <child-comp v-slot:slot2>
+                <!-- 【注意】：【【当被提供的内容只有默认插槽时，组件的标签才可以被当作插槽的模板来使用。这样我们就可以把 v-slot 直接用在组件上, 所以这里的这种写法是错的】】 -->
+
+                <!-- <template v-slot:slot2>6666</template> -->
+                <!-- <template v-slot:default>
+                    <p>hello Eden</p>
+                </template>
+                <template #believe>
+                    <em>JUST DO IT</em>
+                </template> -->
+            </child-comp>
+            <template v-slot:slot3>
+                <h1>I am the default slot</h1>
+            </template>
+        </exap-slot>
+        <default-slot v-slot>
+            <b>我能显示吗</b>
+        </default-slot>
+        <div v-color>2323</div>
+    </div>
+
+    <script>
+        /* 
+        v-slot 只能用在 template 上以及拥有这个 slot 的组件上，
+        注意：当被提供的内容只有默认插槽时，组件的标签才可以被当作插槽的模板来使用。这样我们就可以把 v-slot 直接用在组件上
+     */
+        Vue.component("exap-slot", {
+            template: `
+            <div class="com1">
+                <slot name="slot1" :user="user"></slot>
+                <slot name='slot2'>slot2</slot>
+                <slot name="slot3"></slot>
+            </div>
+            `,
+            data() {
+                return {
+                    user: [
+                        {
+                            id: 1,
+                            name: "aa"
+                        },
+                        {
+                            id: 2,
+                            name: "bb"
+                        }
+                    ]
+                };
+            }
+        });
+
+        Vue.component("child-comp", {
+            template: `
+            <div class='child-comp'>
+                <h3>coming on,Eden!</h3>
+                <slot></slot>
+                <slot name="believe"></slot>
+            </div>
+            `
+        });
+
+        Vue.component("default-slot", {
+            template: `
+            <div>
+                <p>我是一个默认插槽的组件</p>
+                <slot/>
+            </div>
+            `
+        });
+
+        Vue.directive('color',(el,info)=>{
+            console.log('el:',el)
+            console.log('info:',info)
+        })
+
+        new Vue({
+            el: "#app"
+        });
+    </script>
+</body>
+
+</html>

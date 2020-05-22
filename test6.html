@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .canlender {
+            width: 1000px;
+            height: 530px;
+            margin: 0 auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table.bgtable thead tr th {
+            height: 30px;
+        }
+
+        table.bgtable tbody tr td {
+            height: 100px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            text-align: right;
+            vertical-align: top;
+            padding: 4px;
+        }
+
+        table.bgtable tbody tr td.gray {
+            color: gray;
+            background: #DDDDDD;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="canlender" id="canlender">
+        <div class="tablebox1">
+            <table class="bgtable">
+                <thead>
+                    <tr>
+                        <!--汉字表头-->
+                        <th v-for="(item,index) in daynamearr">{{item}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="week in theweek()">
+                        <td v-for="item in week" :class="{'gray': item.prevmonth || item.nextmonth}">{{item.day}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el: "#canlender",
+            data: {
+                daynamearr: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+                //本月的本期构成
+                dayarr: [],
+                year: new Date().getFullYear(),
+                month: new Date().getMonth() + 1,
+            },
+            mounted: function () {
+                //需要知道这个月的第一天是星期几
+                var themonth1stday = (new Date(this.year, this.month - 1, 1)).getDay();
+                console.log(themonth1stday)
+                //              alert(themonth1stday)
+                //本月有多少天，这个月的最后一天就是下个月的最后一天减去一毫秒
+                var y = this.month == 12 ? this.year + 1 : this.year;
+                var m = this.month == 12 ? 1 : this.month;
+                var themonthdaysamount = new Date(new Date(y, m, 1) - 1).getDate();
+                console.log(themonthdaysamount)
+                //上个月有多少天
+                var prevmonthlastday = new Date(new Date(this.year, this.month - 1, 1) - 1).getDate();
+                console.log(prevmonthlastday)
+                //              alert(prevmonthlastday)
+                while (themonth1stday-- > 0) {
+                    this.dayarr.unshift({
+                        "day": prevmonthlastday--,
+                        "prevmonth": true
+                    });
+                };
+                //本月的日期
+                var count = 0;
+                while (themonthdaysamount--) {
+                    this.dayarr.push({
+                        "day": ++count
+                    });
+                }
+                var c = 35 - this.dayarr.length;
+                var count2 = 1
+                while (c-- > 0) {
+                    this.dayarr.push({
+                        "day": count2++,
+                        "nextmonth": true
+                    });
+                }
+            },
+            methods: {
+                theweek: function () {
+                    var _arr = [];
+                    for (var i = 0; i < 5; i++) {
+                        var _week = [];
+                        for (var j = 0; j < 7; j++) {
+                            _week.push(this.dayarr[i * 7 + j]);
+                        }
+                        _arr.push(_week)
+                    }
+                    return _arr
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+    <script>
+        
+        function Foo() {
+            this.a = 1;
+            this.bar = ()=>{
+                console.log(this.a)
+            }     
+        }   
+        Foo.prototype.b = 2;
+        Foo.prototype.run = function(){
+            console.log(333)
+        }
+
+        var test = new Foo();
+        console.log(test.a);
+        test.bar();
+        console.log(test.b);
+        test.run();
+
+        function Cat(){
+            this.c = 4;
+            this.end = function(){
+                console.log(this.c)
+            }
+        }
+        Cat.prototype = test;
+
+        var cat = new Cat();
+        console.log(cat.a);
+        cat.bar();
+        console.log(cat.b);
+        cat.run();
+        console.log(cat.c);
+        cat.end();
+        console.log(cat)
+        console.log(Cat.constructor)
+
+       
+        
+        
+        
+        
+    </script>
+</body>
+</html>
