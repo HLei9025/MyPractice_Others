@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    
+    
+    <script>
+        
+        // 不用 for 循环，递归实现 1-10 的和
+        function oneHundredSum(num){
+            if(num === 1) {
+                return 1
+            }else{
+                return num + oneHundredSum(num - 1)
+            }
+        }
+        const result = oneHundredSum(10)
+        console.log('result:',result) // 55
+    
+    </script>
+</body>
+</html>
