@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .list{
+            background:yellowgreen;
+        }
+        .active{
+            text-decoration: line-through;
+            text-decoration-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+         <div class="top">
+            <input type="text" placeholder="ADD" v-model="todoList"> 
+            <BUtton @click="addAction">ADD</BUtton>
+         </div>
+         <div class="list">
+             <ul>
+                 <input type="text" placeholder="search" v-model = 'search'>
+                 <button @click="searchAction">search</button>
+                 <li v-for="(item,index) in searchList" :key="item.id"
+                  :class="{active: item.finish}"  
+                 >
+                        {{item}}
+                        <button @click="finish(item.id)">完成</button>
+                        <button @click="edit">编辑</button>
+                        <button @click="deleceAtion(item.id)">删除</button>
+                 </li>
+             </ul>
+         </div>
+         <div class="state">
+             <button>all</button>
+             <button>未完成</button>
+             <button>完成</button>
+         </div>
+        </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data(){
+                return {
+                   todoList: '',
+                   list: [],
+                   searchList: [],
+                   id: 1,
+                   currentIndex: 1,
+                   search: ''
+                }
+            },
+            methods:{
+                addAction(){
+                    if(this.todoList){
+                        let obj = {};
+                        obj.id = this.id;
+                        obj.text = this.todoList,
+                        obj.finish = false;
+                        this.list.push(obj)
+                        this.searchList.push(obj)
+                        this.id++;
+                        // console.log(this.list)
+                        this.todoList = ''
+                    }
+                },
+                getItemfromId(id,list){
+                    return this.list.findIndex( item => item.id === id)
+                },
+                deleceAtion(id){
+                    let index = this.getItemfromId(id,this.list)
+                    // console.log(index)
+                    this.list.splice(index,1)
+                    this.searchList.splice(index,1)
+                    // for(let i in this.list){
+                    //     console.log(i)
+                    //     if(this.list[i].id === id){
+                    //         this.list.splice(i,1)
+                    //     }
+                    // }
+                },
+                getItem(id,list){
+                    return this.list.find(item => item.id === id)
+                },
+                finish(id){
+                    let item = this.getItem(id,this.list )
+                    item.finish = true;
+                    this.currentIndex = item.finish;                  
+                },
+                getItemtext(t,list){
+                   // console.log(t,list)
+                    let arr = [];
+
+                     for( let i = 0 ; i< list.length;i++){
+                         console.log(i,4444444)
+                         console.log(list[i].text)
+                         if(list[i].text.indexOf(t) !== -1){
+                           arr.push(list[i])
+                        }
+                    }
+                    return arr;
+
+                    
+                },
+                searchAction(){
+               //     console.log(this.search)
+                    let newArr = this.getItemtext(this.search,this.list)
+                   console.log(newArr)
+                   this.searchList = newArr;
+                   
+                }
+            },
+            computed:{
+                
+            }
+        })
+    </script>
+</body>
+</html>
