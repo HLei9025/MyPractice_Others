@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script>
+        console.log('Vue::',Vue)
+        let vm = new Vue({
+            el: "#app",
+            data(){
+                return {
+                    msg: 'hello'
+                }
+            },
+            methods:{
+                getDb(){
+                    let  url = './db.json'
+                    axios(url).then((res) => {
+                        console.log(res,22222222)
+                    })
+                }
+                
+            },
+            created(){
+                this.getDb()
+            }
+        })
+        console.log('vm:',vm)
+    </script>
+</body>
+</html>

@@ -12,12 +12,50 @@
             text-decoration: line-through;
             text-decoration-color: red;
         }
+        .mask{
+            width: 100%;
+            height: 100%;
+            background:gray;
+            opacity: 0.6;
+            position: absolute;
+            left: 0;
+            top: 0; 
+            z-index: 1;
+        }
+        .cover{
+            position: absolute;
+            left:0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 500px;
+            height: 200px;
+            background: gray;
+            cursor:pointer;
+            z-index: 2;
+            padding: 30px;
+        }
+        .updataipt{
+            width: 100%;
+            height: 40px;
+            margin-top: 70px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+        .choose{
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            
+        }
     </style>
 </head>
 <body>
     <div id="app">
          <div class="top">
-            <input type="text" placeholder="ADD" v-model="todoList"> 
+            <input type="text" placeholder="ADD" v-model="todoList" v-focus @keydown="addEnter" /> 
             <BUtton @click="addAction">ADD</BUtton>
          </div>
          <div class="list">
@@ -29,19 +67,31 @@
                  >
                         {{item}}
                         <button @click="finish(item.id)">完成</button>
-                        <button @click="edit">编辑</button>
+                        <button v-if="isFinish == item.finish" @click="editAction(item)">编辑</button>
                         <button @click="deleceAtion(item.id)">删除</button>
                  </li>
              </ul>
          </div>
          <div class="state">
-             <button>all</button>
-             <button>未完成</button>
-             <button>完成</button>
+             <button @click="allAction">all</button>
+             <button @click="todoAction">未完成</button>
+             <button @click="finishAction">完成</button>
+         </div>
+         <div class="mask" v-if="isShow" @click="close"></div>
+         <div class="cover" v-if="isShow">
+             <input type="text" placeholder="请输入需要更改的内容" class="updataipt" v-model="changeText"
+             v-focus
+             >
+
+             <div class="choose">
+                 <button class="cancel" @click="cancelAction">取消</button>
+                 <button class="determine" @click="determineAction">确定</button>
+             </div>
          </div>
         </div>
     <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
     <script>
+        console.log('Vue::',Vue)
         let vm = new Vue({
             el: "#app",
             data(){
@@ -51,7 +101,12 @@
                    searchList: [],
                    id: 1,
                    currentIndex: 1,
-                   search: ''
+                   search: '',
+                   isShow: false,
+                   changeText: '',
+                   currentEditId: '',
+                   isFinish: false,
+                   state: 0
                 }
             },
             methods:{
@@ -89,7 +144,8 @@
                 finish(id){
                     let item = this.getItem(id,this.list )
                     item.finish = true;
-                    this.currentIndex = item.finish;                  
+                    // this.currentIndex = item.finish;     
+                    // this.isFinish = item.finish;           
                 },
                 getItemtext(t,list){
                    // console.log(t,list)
@@ -108,14 +164,78 @@
                 },
                 searchAction(){
                //     console.log(this.search)
-                    let newArr = this.getItemtext(this.search,this.list)
-                   console.log(newArr)
-                   this.searchList = newArr;
+                //     let newArr = this.getItemtext(this.search,this.list)
+                //    console.log(newArr)
+                //    this.searchList = newArr;
+                   if(this.state === 0){
+                        this.searchList = this.getItemtext(this.search,this.list)
+                    }else if(this.state === 1) {
+                        let arr = this.list.filter(item => item.finish === false)
+                        this.searchList = this.getItemtext(this.search,arr)
+                    }else if(this.state === 2){
+                        let newArr = this.list.filter(item => item.finish === true) 
+                        this.searchList = this.getItemtext(this.search,newArr)
+                    }
                    
+                },
+                editAction(item){    
+                    this.currentEditId = item.id;  
+                    this.changeText = item.text;
+                    this.isShow = true
+                },
+                determineAction(){
+                    let item = this.getItem(this.currentEditId,this.list)
+                    item.text= this.changeText 
+                    this.isShow = false
+                    console.log('llllllllll')
+                },
+                cancelAction(){
+                    this.isShow = false
+                },
+                close(){
+                    this.isShow = false 
+                },
+                allAction(){
+                    this.state = 0;
+                },
+                todoAction(){
+                    this.state = 1;
+                },
+                finishAction(){
+                    this.state = 2;
+                },
+                addEnter(e) {
+                   if(e.keyCode == 13){
+                       this.addAction()
+                   }
                 }
             },
-            computed:{
-                
+            directives:{
+                focus:{
+                    inserted: function(el){
+                        el.focus()
+                    }
+                }
+            },
+            watch:{
+                state:{
+                    handler(){
+                        if(this.state === 0){
+                            this.searchList = this.list
+                        }else if(this.state === 1) {
+                            this.searchList = this.list.filter(item => !item.finish)
+                        }else if(this.state === 2){
+                            this.searchList = this.list.filter(item => item.finish) 
+                        }
+                        console.log('kkkkkkkkkk')   
+                    },
+                    immediete: true,
+                    deep:true
+                }
+            },
+            created(){
+                console.log(this.$refs)
+               console.log( this.$refs.addipt)
             }
         })
     </script>
