@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,59 @@
   <i>nihao</i>
   <strong>hello</strong>
   <b>你好</b>
+  
+  <script>
+    var userName = '张三'
+    function hello(name){
+      console.log('hello'+name)
+      console.log('this:',this)
+    }
+    // const hello = (name)=>{
+    //   console.log('hi,hello'+name)
+    //   console.log('this:',this)
+    // }
+    // setTimeout(hello(userName),3000) // 立即执行，打印‘hello张三’，this打印为Window，不会等到3秒
+    // setTimeout('hello(userName)',3000) // 3秒后执行，打印‘hello张三’，this打印为Window
+    // setTimeout(hello,3000) // 3秒后执行，打印‘helloundefined’，this打印为Window
 
+    // var a = 123
+    // setTimeout(function(a){
+    //   console.log('a:',a) // 3秒后打印结果 undefined
+    // },3000)
+
+    // 通过 setTimeout的第三个参数传参
+    // var a = 123
+    // setTimeout(function(b){
+    //   console.log('b:',b) // 3秒后打印结果 b:123, 形参b也可以接收到传进去的a
+    //   console.log('a:',a) // 3秒后打印结果 a:123, 可以直接打印传进去的变量a
+    // },3000,a)
+
+    // var a = 123
+    // setTimeout(function(b){
+    //   console.log('this:',this)
+    //   console.log('b:',b) // 3秒后打印结果 b:123
+    // }.bind(null,a),3000)
+
+    var a = 123
+    setTimeout(function(){
+      console.log('a:',a) // 3秒后打印结果 a:123
+    },3000)
+
+    window.onload = function(){
+      var local = function(){
+        function global(){
+              console.log("这是局部变量！");
+          }
+          setTimeout("global()",1000);//"这是全局变量！"
+          setTimeout(global,1000);//"这是局部变量！"
+      };
+      local();
+    };
+    function global(){
+      console.log("这是全局变量！")
+    }
+
+  </script>
 
   
 </body>
