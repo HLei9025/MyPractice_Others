@@ -12,6 +12,47 @@
   <b>你好</b>
   
   <script>
+    /* 
+      【对象的拷贝】
+      1.对象的方法（assign()）或者扩展运算符（...）复制的对象，得到的两个对象是false,且第一层value为基本数据类型的话，类似于深拷贝，改变一个，另一个对象不会变化，但是如果value是引用类型，改变这个引用类型里面的值，那个复制的对象对应的值也会变。也就是说对象的方法（assign()）或者扩展运算符（...）只能进行对象第一层的深拷贝，如果对象第一层的value值为引用类型，那么这个value的拷贝就无法实现深拷贝,所以从层次来说，严格意义上它们还是浅拷贝。
+      2.通过JSON.parse(JSON.stringify())的方法拷贝的对象是深拷贝。
+     */
+    let obj1 = {
+      a: 1,
+      b: 2,
+      c: {d: 4, e: 5}
+    }
+    let obj2 = JSON.parse(JSON.stringify(obj1))
+    console.log(obj1 === obj2) // false
+    obj1.a = 11
+    console.log(obj2.a) // 1
+    console.log(obj2.c === obj1.c) // false
+    obj1.c.d = 22
+    console.log(obj2.c.d) // 4
+
+    // let obj2 = Object.assign({}, obj1)
+    // console.log(obj1 === obj2) // false
+    // obj1.a = 11
+    // console.log(obj2.a) // 1
+    // console.log(obj2.c === obj1.c) // true
+    // obj1.c.d = 22
+    // console.log(obj2.c.d) // 22
+
+    // let obj2 = {...obj1}
+    // console.log(obj1 === obj2) // false
+    // obj1.a = 11
+    // console.log(obj2.a) // 1
+    // console.log(obj2.c === obj1.c) // true
+    // obj1.c.d = 22
+    // console.log(obj2.c.d) // 22
+
+
+    /*
+      【setTimeout()方法中第一个参数函数的书写方式】
+      1.加引号（setTimeout("func()",1000)）,且这个func会在全局找
+      2.不加引号（setTimeout(func,1000)），这个func会在局部找
+      3.setTimeout(func(),1000),不会延时，func函数会立即执行
+    */
     var userName = '张三'
     function hello(name){
       console.log('hello'+name)
