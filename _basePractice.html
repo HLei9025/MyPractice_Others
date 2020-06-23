@@ -13,6 +13,49 @@
   
   <script>
     /* 
+      【数组的方法，forEach(), map(), filter()等会不会改变原数组】
+      如果在遍历方法内对原数组进行了相关的改变操作，每次遍历得到且传入的参数为引用数据类型的话，会改变原数组，例如：map(item => {} )此处的item为引用数据类型；如果每次遍历得到且传入的参数为基本数据类型的话，则不会改变原数组，例如：map(item => {} )此处的item为基本数据类型。
+     */
+    let potato = [
+      {id: 1, w: 10},
+      {id: 2, w: 30},
+      {id: 3, w: 40},
+      {id: 4, w: 20},
+      {id: 5, w: 50}
+    ]
+    // let potato = [
+    //   {id: 1, w: {a: "aa"}},
+    //   {id: 2, w: {a: "bb"}},
+    //   {id: 3, w: {a: "cc"}},
+    //   {id: 4, w: {a: "dd"}},
+    //   {id: 5, w: {a: "ee"}}
+    // ]
+
+    // let potato = [1, 2, 3, 4]
+
+    // let newArr = potato.forEach(item => { 
+    //   item.w += 5
+    //   // return item.id
+    // })
+    // console.log('potato', potato) // 改变后的
+    // console.log('newArr:', newArr) // undefined
+
+    // let res = potato.map(({w}) => {
+    //   w.a += 5
+    //   return {w: w.a}
+    // })
+    // console.log('potato::', potato) 
+    // console.log('res::', res)
+
+    // let newArr = potato.filter(item => {
+    //   item += 5
+    //   return item > 8
+    // })
+    // console.log('potato:', potato)
+    // console.log('newArr:', newArr)
+
+
+    /* 
       【对象的拷贝】
       1.对象的方法（assign()）或者扩展运算符（...）复制的对象，得到的两个对象是false,且第一层value为基本数据类型的话，类似于深拷贝，改变一个，另一个对象不会变化，但是如果value是引用类型，改变这个引用类型里面的值，那个复制的对象对应的值也会变。也就是说对象的方法（assign()）或者扩展运算符（...）只能进行对象第一层的深拷贝，如果对象第一层的value值为引用类型，那么这个value的拷贝就无法实现深拷贝,所以从层次来说，严格意义上它们还是浅拷贝。
       2.通过JSON.parse(JSON.stringify())的方法拷贝的对象是深拷贝。
