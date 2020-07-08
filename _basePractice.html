@@ -13,6 +13,22 @@
   
   <script>
     /* 
+      document.documentElement 得到的是页面的根元素
+        <html lang="zh">
+        <head>...</head>
+        <body>...</body>
+        </html>
+      document.documentElement.style 得到的是根元素的样式对象
+        CSSStyleDeclaration{......} 
+      document.body 得到的是 body 元素
+        <body>...</body>
+    */
+    console.log('document.documentElement:', document.documentElement)
+    console.log('document.documentElement.style:', document.documentElement.style)
+    console.log('document.body:', document.body)
+
+
+    /* 
       【数组的方法，forEach(), map(), filter()等会不会改变原数组】
       如果在遍历方法内对原数组进行了相关的改变操作，每次遍历得到且传入的参数为引用数据类型的话，会改变原数组，例如：map(item => {} )此处的item为引用数据类型；如果每次遍历得到且传入的参数为基本数据类型的话，则不会改变原数组，例如：map(item => {} )此处的item为基本数据类型。
      */
