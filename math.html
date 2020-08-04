@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html, body{
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    .wrap{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container{
+      border: 1px solid #666;
+      border-radius: 5px;
+      padding: 20px 10px;
+      background-color: #aaa;
+      width: 300px;
+    }
+    .area{
+      padding: 5px 0;
+      display: flex;
+    }
+    label{
+      display: inline-block;
+      width: 30px;
+    }
+    p{
+      margin: 0;
+    }
+    .tips{
+      border: 1px solid #666;
+      border-radius: 5px;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+    .btn, .clear-all{
+      flex: 1;
+      padding: 3px 0;
+      font-size: 14px;
+      border: 0;
+      outline: none;
+    }
+    .clear-all{
+      background-color: brown;
+    }
+    .clear-all:hover{
+      color: #fff;
+      cursor: pointer;
+    }
+    .btn{
+      margin-left: 5px;
+      background-color: darkcyan;
+    }
+    .btn:hover{
+      color: #fff;
+      cursor: pointer;
+    }
+    .ipt{
+      flex: 1;
+    }
+    .ipt:focus{
+      outline-color: red;
+    }
+    .tip{
+      color: red;
+      font-style: italic;
+      font-size: 12px;
+      display: none;
+    }
+    .btn-wrap{
+      display: flex;
+    }
+    .clear{
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="container">
+      <div class="area1 area">
+        <label for="">x1:</label>
+        <input class="ipt_x1 ipt" type="text" placeholder="请输入x1">
+        <button class="clear clear1">清除</button>
+      </div>
+      <div class="area2 area">
+        <label for="">x2:</label>
+        <input class="ipt_x2 ipt" type="text" placeholder="请输入x2">
+        <button class="clear clear2">清除</button>
+      </div>
+      <div class="area3 area">
+        <label for="">H2:</label>
+        <input class="ipt_H2 ipt" type="text" placeholder="请输入H2">
+        <button class="clear clear3">清除</button>
+      </div>
+      <div class="btn-wrap">
+        <button class="clear-all">清空</button>
+        <button class="btn">计算</button>
+      </div>
+      <p class="tip"></p>
+      <div class="result area">
+        <span>结果(B)：</span>
+        <span class="res"></span>
+      </div>
+      <div class="tips">
+        <span>公式：</span>
+        <p>(x1-x2)/x1=c1</p>
+        <p>H2*(1-c1)=B</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    let iptX1 = document.querySelector('.ipt_x1')    
+    let iptX2 = document.querySelector('.ipt_x2')    
+    let iptH2 = document.querySelector('.ipt_H2')    
+    let btn = document.querySelector('.btn')
+    let res = document.querySelector('.res')
+    let clear1 = document.querySelector('.clear1')
+    let clear2 = document.querySelector('.clear2')
+    let clear3 = document.querySelector('.clear3')
+    let tip = document.querySelector('.tip')
+    let ipt = document.querySelectorAll('.ipt')
+    let clearAll = document.querySelector('.clear-all')
+
+    btn.onclick = function(){
+      let iptx1Val = Number(iptX1.value)
+      let iptx2Val = Number(iptX2.value)
+      let ipth2Val = Number(iptH2.value)
+      if(iptx1Val && iptx2Val && ipth2Val && !isNaN(iptx1Val) && !isNaN(iptx2Val) && !isNaN(ipth2Val)){
+        let result = null
+        result = ipth2Val * (1 - (iptx1Val - iptx2Val) / iptx1Val)
+        res.innerHTML = result
+      }else if(isNaN(iptx1Val)  || isNaN(iptx2Val)  || isNaN(ipth2Val)){
+        tip.innerHTML = '注意：输入有误，请输入数字'
+        tip.style.display = 'unset'
+      }else{
+        tip.innerHTML = '注意：输入不能为空'
+        tip.style.display = 'unset'
+      }
+    }
+
+    clear1.onclick = function(){
+      iptX1.value = ''
+      res.innerHTML = ''
+      tip.style.display = 'none'
+    }
+    clear2.onclick = function(){
+      iptX2.value = ''
+      res.innerHTML = ''
+      tip.style.display = 'none'
+    }
+    clear3.onclick = function(){
+      iptH2.value = ''
+      res.innerHTML = ''
+      tip.style.display = 'none'
+    }
+
+    clearAll.onclick = function(){
+      iptX1.value = ''
+      iptX2.value = ''
+      iptH2.value = ''
+      res.innerHTML = ''
+      tip.style.display = 'none'
+    }
+
+    for (let i = 0; i < ipt.length; i++) {
+      ipt[i].onfocus = function(){
+        tip.style.display = 'none'
+      }
+      console.log('ipt[i]:',ipt[i])
+      ipt[i].oninput = function(){
+        res.innerHTML = ''
+      }
+    }
+
+  </script>
+</body>
+</html>
