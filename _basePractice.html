@@ -4,14 +4,109 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .box{
+      width: 100%;
+      height: 50px;
+      background: blueviolet;
+    }
+    @media screen and (max-width: 1000px) {
+      .box{
+        background-color: brown;
+      }
+    }
+    .donghua{
+      width: 200px;
+      height: 200px;
+      background: burlywood;
+    }
+    .trans{
+      width: 50px;
+      height: 50px;
+      background-color: cadetblue;
+      animation: rotate 2s linear infinite;
+    }
+    @keyframes rotate {
+      from {transform: rotate(0deg);}
+      to {transform: rotate(360deg);}
+    }
+    .cicle{
+      width: 300px;
+      height: 300px;
+      background-color: aquamarine; 
+      border: 1px solid #333;     
+    }
+    .min{
+      width: 50px;
+      height: 50px;
+      background-color: burlywood;
+      animation: circle 8s linear infinite;
+    }
+    @keyframes circle {
+      0% {transform: translate(0);}
+      25% {transform: translateX(250px);}
+      50% {transform: translate(250px, 250px);}
+      75% {transform: translate(0, 250px);}
+      100% {transform: translate(0, 0);}
+    }
+  </style>
 </head>
 <body>
   <em>你好</em>
   <i>nihao</i>
   <strong>hello</strong>
   <b>你好</b>
+
+  <br>
+  <hr>
+  <label for="pass">点我，输入密码</label>
+  <input type="password" id="pass" placeholder="inset the password">
+  <label>name
+    <input type="text"/>
+  </label>
+  <label>
+    <input type="radio" name="sex"/><span>男</span>
+  </label>
+  <label>
+    <input type="radio" name="sex"/><span>女</span>
+  </label>
+  <input type="image" src="" width="100" height="100" alt="上传图片" />
+  <input type="file"  multiple="multiple" />
+
+  <br>
+  <hr>
+  <dialog open>111</dialog>
+
+  <br>
+  <hr>
+  <div class="box"></div>
+
+  <hr>
+  <div class="donghua"></div>
+
+  <hr>
+  <div class="trans"></div>
+
+  <hr>
+  <div class="cicle">
+    <div class="min"></div>
+  </div>
   
   <script>
+    /* 
+      鼠标移入移出控制缩放大小，移入移出都有效果
+     */
+    let donghuaEl = document.querySelector('.donghua')
+    donghuaEl.onmouseleave = function(){
+      this.style.transform = 'scale(1)'
+      this.style.transition = 'all 1s'
+    }
+    donghuaEl.onmouseenter = function(){
+      this.style.transform = 'scale(1.2)'
+      this.style.transition = 'all 1s'
+    }
+
+
     /* 
       document.documentElement 得到的是页面的根元素
         <html lang="zh">
