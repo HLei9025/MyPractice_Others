@@ -15,11 +15,18 @@
         background-color: brown;
       }
     }
+
     .donghua{
       width: 200px;
       height: 200px;
       background: burlywood;
+      transition: all 1s;
     }
+    /* transition 和 transform 分开写，鼠标移入移出都有过度效果 */
+    .donghua:hover{
+      transform: scale(1.2);
+    }
+
     .trans{
       width: 50px;
       height: 50px;
@@ -96,15 +103,15 @@
     /* 
       鼠标移入移出控制缩放大小，移入移出都有效果
      */
-    let donghuaEl = document.querySelector('.donghua')
-    donghuaEl.onmouseleave = function(){
-      this.style.transform = 'scale(1)'
-      this.style.transition = 'all 1s'
-    }
-    donghuaEl.onmouseenter = function(){
-      this.style.transform = 'scale(1.2)'
-      this.style.transition = 'all 1s'
-    }
+    // let donghuaEl = document.querySelector('.donghua')
+    // donghuaEl.onmouseleave = function(){
+    //   this.style.transform = 'scale(1)'
+    //   this.style.transition = 'all 1s'
+    // }
+    // donghuaEl.onmouseenter = function(){
+    //   this.style.transform = 'scale(1.2)'
+    //   this.style.transition = 'all 1s'
+    // }
 
 
     /* 
