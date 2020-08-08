@@ -98,8 +98,37 @@
   <div class="cicle">
     <div class="min"></div>
   </div>
+
+  <hr>
+  <input type="text" class="ipt">
+  <ul class="list"></ul>
+
+  <button class="nnn">click</button>
   
   <script>
+    /* 
+      jsonp跨域请求数据
+     */
+    let ipt = document.querySelector('.ipt')
+    let list = document.querySelector('.list')
+    let Script = null
+    ipt.onkeyup = function(){
+      if(Script){ // 保证页面只有一个script标签
+        document.body.removeChild(Script)
+      }
+      Script = document.createElement('script')
+      Script.src = 'http://suggestion.baidu.com/su?cb=myCb&wd='+ipt.value
+      document.body.appendChild(Script)
+    }
+    function myCb(json){
+      // console.log('json:', json)
+      list.innerHTML = '' // 清空之前的结果
+      for(let i = 0; i < json.s.length; i++){
+        list.innerHTML += `<li>${json.s[i]}</li>`
+      }
+    }
+
+
     /* 
       鼠标移入移出控制缩放大小，移入移出都有效果
      */
