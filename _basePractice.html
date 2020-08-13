@@ -107,6 +107,41 @@
   
   <script>
     /* 
+      打印结果：
+      33
+      11
+      66
+      22
+      44
+      55
+      time
+    */
+    async function fn1(){
+      console.log(11)
+      return 'a'
+    }
+    async function fn2(){
+      console.log(22)
+      return 'b'
+    }
+    (async function fn3(){
+      console.log(33)
+      setTimeout(function(){
+        console.log('time')
+      }, 0)
+      await fn1()
+      await fn2()
+      console.log(44)
+      throw 'c'
+    })().then(res => {
+      console.log(res)
+    }, res => {
+      console.log(55)
+    })
+    console.log(66)
+
+
+    /* 
       jsonp跨域请求数据
      */
     let ipt = document.querySelector('.ipt')
