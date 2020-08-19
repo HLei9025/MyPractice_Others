@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>树状数据结构</title>
+</head>
+<body>
+  <script>
+    let data = [
+      {id: 1, title: '动物', pid: 0},
+      {id: 2, title: '大象', pid: 1},
+      {id: 3, title: '熊猫', pid: 1},
+      {id: 4, title: '人物', pid: 0},
+      {id: 5, title: '黄继光', pid: 4},
+      {id: 6, title: '董存瑞', pid: 4},
+      {id: 7, title: '邱少云', pid: 4},
+      {id: 8, title: '景物', pid: 0},
+      {id: 9, title: '电影', pid: 0},
+      {id: 10, title: '韩国电影', pid: 9},
+      {id: 11, title: '美国电影', pid: 9},
+      {id: 12, title: 'DC电影', pid: 11},
+      {id: 13, title: '漫威电影', pid: 11},
+      {id: 14, title: '中国电影', pid: 9},
+      {id: 15, title: '香港电影', pid: 14},
+      {id: 16, title: '大陆电影', pid: 14},
+      {id: 17, title: '恐怖片', pid: 16},
+      {id: 18, title: '悬疑片', pid: 16},
+      {id: 19, title: '台湾电影', pid: 14},
+      {id: 20, title: '笔仙', pid: 17}
+    ]
+/* 
+ 转化为以下的树状格式:
+    let res = [
+      {id: 1, title: '动物', pid: 0, children: [
+        {id: 2, title: '大象', pid: 1, children: []},
+        {id: 3, title: '熊猫', pid: 1, children: []}
+      ]},
+      {id: 4, title: '人物', pid: 0, children: [
+        {id: 5, title: '黄继光', pid: 4, children: []},
+        {id: 6, title: '董存瑞', pid: 4, children: []},
+        {id: 7, title: '邱少云', pid: 4, children: []}
+      ]},
+      {id: 8, title: '景物', pid: 0, children: []},
+      {id: 9, title: '电影', pid: 0, children: [
+        {id: 10, title: '韩国电影', pid: 9, children: []},
+        {id: 11, title: '美国电影', pid: 9, children: [
+          {id: 12, title: 'DC电影', pid: 11, children: []},
+          {id: 13, title: '漫威电影', pid: 11, children: []}
+        ]},
+        {id: 14, title: '中国电影', pid: 9, children: [
+          {id: 15, title: '香港电影', pid: 14, children: []},
+          {id: 16, title: '大陆电影', pid: 14, children: [
+            {id: 17, title: '恐怖片', pid: 16, children: [
+              {id: 20, title: '笔仙', pid: 17, children: []}
+            ]},
+            {id: 18, title: '悬疑片', pid: 16, children: []}
+          ]},
+          {id: 19, title: '台湾电影', pid: 14, children: []},
+        ]},
+      ]}
+    ]
+ */
+
+ 
+    /* 方法一 */
+    function toTree1(data, pid){
+      let outerData = data.filter(item => item.pid === pid) // 获得相对外层
+      let mapData = outerData.map(item => {
+        return {
+          ...item,
+          children: toTree1(data, item.id) // 递归调用
+        }
+      })
+      return mapData
+    }
+    console.log(toTree1(data, 0))
+
+
+    /* 方法二 */
+    function toTree2(data){
+      return data.filter(current => { 
+        let children = data.filter(item => item.pid === current.id) // 查找 pid 和 id 的对应关系，得到对应的子级
+        current.children = children // 将子级放在父级的 children 选项之下
+        return current.pid == 0 // 外层的过滤只用返回最外层就可以了，因为其子孙级已经在上两行代码统统处理添加进去了
+      })
+    }
+    console.log(toTree2(data))
+
+
+    /* 方法三 */
+    function toTree3(data) {
+      let result = [] // 返回结果存放处
+      if(!Array.isArray(data)) { // 如果传进来的数据不是数组，直接返回空数组
+          return result
+      }
+      let map = {}; // 建一个空的映射对象，把所有数据的 id 复制出来，以键值对的方式存放在此 map 对象中
+      data.forEach(item => {
+          map[item.id] = item; // 以所有 id 为键名，对应的键值为对应 id 所在的对象  
+      });
+      data.forEach(item => { // 再次遍历所有数据
+          let parent = map[item.pid]; // 根据每一项的 pid 在前面存的 map 对象中找，如果有，此处的 parent 就是对应的对象，如果没有，parent 就是 undefined 
+          if(parent) { // 有父级，就把此子类 push 进父级的 children 选项之中
+            item.children = [];
+            (parent.children || (parent.children = [])).push(item);
+          } else { // 没有父级，那就是最外层，直接 push 进结果数组
+            item.children = []
+            result.push(item);
+          }
+      });
+      return result;
+    }
+    console.log(toTree3(data))
+  
+ 
+
+  </script>
+</body>
+</html>
