@@ -56,9 +56,53 @@
       75% {transform: translate(0, 250px);}
       100% {transform: translate(0, 0);}
     }
+    .tag{
+      display: flex;
+    }
+    .tag-item{
+      /* width: 40px;
+      height: 40px; */
+      padding: 3px 5px;
+      margin-right: 3px;
+      background-color: cadetblue;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 12px;
+    }
+    .scrolll{
+      width: 200px;
+      height: 300px;
+      overflow: auto;
+      border: 1px solid #666;
+      margin: 10px 20px;
+    }
+    .inner{
+      width: 100%;
+    }
+    ul, li{
+      padding: 0;
+      margin: 0;
+    }
   </style>
 </head>
 <body>
+  <div class="scrolll">
+    <div class="inner">
+
+    </div>
+  </div>
+  <hr>
+
+  <div class="tag">
+    <span class="tag-item">成龙</span>
+    <span class="tag-item">李小龙</span>
+    <span class="tag-item">远古巨龙</span>
+  </div>
+  <hr>
+
   <em>你好</em>
   <i>nihao</i>
   <strong>hello</strong>
@@ -106,6 +150,31 @@
   <button class="nnn">click</button>
   
   <script>
+    /* 
+      滚动坐标判断
+    */
+    let oScroll = document.querySelector('.scrolll')
+    let oInner = document.querySelector('.inner')
+    let oUl = document.createElement('ul');
+    let oLi = null
+    for(let i = 0; i < 100; i++){
+      oLi = document.createElement('li')
+      oLi.innerHTML = `第${i+1}个li`  
+      oUl.appendChild(oLi)
+    }
+    oInner.appendChild(oUl)
+    oScroll.addEventListener('scroll', function(){
+      console.log('this.scrollTop:', this.scrollTop)
+      console.log('this.scrollHeight:', this.scrollHeight)
+      console.log('this.offsetHeight:', this.offsetHeight)
+      console.log('this.clientHeight:', this.clientHeight)
+      console.log('this.offsetTop:', this.offsetTop)
+      if(this.scrollTop + this.clientHeight === this.scrollHeight){
+        console.log('load more ...')
+      }
+    })
+
+
     /* 
       打印结果：
       33
