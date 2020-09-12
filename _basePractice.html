@@ -150,6 +150,121 @@
   <button class="nnn">click</button>
   
   <script>
+    /**
+      构造函数和 add 方法参数为动态的，length 返回最新数组的长度，all 方法返回数组
+    */
+    // es6 写法：
+    class List{
+      constructor(...rest){
+        this.arr = rest
+        this.length = ''
+      }
+      add(...eq){
+        this.arr = [...this.arr, ...eq]
+        this.length = this.arr.length
+      }
+      all(){
+        return this.arr
+      }
+    }
+    let ls = new List('A', 'B', 'C')
+    ls.add('D', 'E')
+    
+    console.log('ls.length:',ls.length) // 5
+    console.log('ls.all:',ls.all()) // ["A", "B", "C", "D", "E"]
+    
+    // es5 写法：
+    // function List(...rest){
+    //   this.arr = rest
+    //   this.length = ''
+    // }
+    // List.prototype.add = function(...eq){
+    //   this.arr = [...this.arr, ...eq]
+    //   this.length = this.arr.length
+    // }
+    // List.prototype.all = function(){
+    //   return this.arr
+    // }
+    // let ls = new List('A','B','C')
+    // ls.add('D','E')
+
+    // console.log('ls.length:',ls.length) // 5
+    // console.log('ls.all():',ls.all()) // ["A", "B", "C", "D", "E"]
+
+
+    /* 
+      数据解析
+     */
+    let arr = [
+      {id: 1, title: '动物', pid: 0, is_over: 1, children: [
+        {id: 2, title: '大象', pid: 1, is_over: 1, children: []},
+        {id: 3, title: '熊猫', pid: 1, is_over: 1, children: []}
+      ]},
+      {id: 4, title: '人物', pid: 0, is_over: 1, children: [
+        {id: 5, title: '黄继光', pid: 4, is_over: 0, children: []},
+        {id: 6, title: '董存瑞', pid: 4, is_over: 1, children: []},
+        {id: 7, title: '邱少云', pid: 4, is_over: 0, children: []}
+      ]},
+      {id: 8, title: '景物', pid: 0, is_over: 0, children: []},
+      {id: 9, title: '电影', pid: 0, is_over: 1, children: [
+        {id: 10, title: '韩国电影', pid: 9, is_over: 1, children: []},
+        {id: 11, title: '美国电影', pid: 9, is_over: 1, children: [
+          {id: 12, title: 'DC电影', pid: 11, is_over: 0, children: []},
+          {id: 13, title: '漫威电影', pid: 11, is_over: 1, children: []}
+        ]},
+        {id: 14, title: '中国电影', pid: 9, is_over: 1, children: [
+          {id: 15, title: '香港电影', pid: 14, is_over: 0, children: []},
+          {id: 16, title: '大陆电影', pid: 14, is_over: 1, children: [
+            {id: 17, title: '恐怖片', pid: 16, is_over: 1, children: [
+              {id: 20, title: '笔仙', pid: 17, is_over: 0, children: []}
+            ]},
+            {id: 18, title: '悬疑片', pid: 16, is_over: 1, children: []}
+          ]},
+          {id: 19, title: '台湾电影', pid: 14, is_over: 1, children: []},
+        ]},
+      ]}
+    ]
+    // 计数，计算一共有多少条项目
+    function totalCount(arr){
+      let num = 0
+      function count(arr){
+        arr.forEach(element => {
+          num++
+          if(element.children.length > 0){
+            count(element.children)
+          }
+        });
+      }
+      count(arr)
+      return num
+    }
+    let ress = totalCount(arr)
+    console.log("ress:",ress)
+    // 将所有层级中is_over不为0的过滤出来
+    function filterData(arr){
+        let data = arr.filter(item=>{
+          if(item.children.length > 0){
+            item.children = filterData(item.children)
+          }
+          return item.is_over !== 0
+        })
+        return data
+    }
+    console.log("newArr:",filterData(arr))
+    // 将所有层级中children无内容的删除键名，有子级的保留
+    function mapSource(arr){
+      return arr.map(item => {
+        if(item.children.length == 0){
+          delete item.children
+        }else{
+          mapSource(item.children)
+        }
+        return item
+      })
+    }
+    console.log('mapSouce:',mapSource(arr))
+
+
     /* 
       滚动坐标判断
     */
