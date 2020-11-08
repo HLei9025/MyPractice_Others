@@ -1,65 +1,93 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
   <style>
-    .box{
+    .box {
       width: 100%;
       height: 50px;
       background: blueviolet;
     }
+
     @media screen and (max-width: 1000px) {
-      .box{
+      .box {
         background-color: brown;
       }
     }
 
-    .donghua{
+    .donghua {
       width: 200px;
       height: 200px;
       background: burlywood;
       transition: all 1s;
     }
+
     /* transition 和 transform 分开写，鼠标移入移出都有过度效果 */
-    .donghua:hover{
+    .donghua:hover {
       transform: scale(1.2);
     }
 
-    .trans{
+    .trans {
       width: 50px;
       height: 50px;
       background-color: cadetblue;
       animation: rotate 2s linear infinite;
     }
+
     @keyframes rotate {
-      from {transform: rotate(0deg);}
-      to {transform: rotate(360deg);}
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
-    .cicle{
+
+    .cicle {
       width: 300px;
       height: 300px;
-      background-color: aquamarine; 
-      border: 1px solid #333;     
+      background-color: aquamarine;
+      border: 1px solid #333;
     }
-    .min{
+
+    .min {
       width: 50px;
       height: 50px;
       background-color: burlywood;
       animation: circle 8s linear infinite;
     }
+
     @keyframes circle {
-      0% {transform: translate(0);}
-      25% {transform: translateX(250px);}
-      50% {transform: translate(250px, 250px);}
-      75% {transform: translate(0, 250px);}
-      100% {transform: translate(0, 0);}
+      0% {
+        transform: translate(0);
+      }
+
+      25% {
+        transform: translateX(250px);
+      }
+
+      50% {
+        transform: translate(250px, 250px);
+      }
+
+      75% {
+        transform: translate(0, 250px);
+      }
+
+      100% {
+        transform: translate(0, 0);
+      }
     }
-    .tag{
+
+    .tag {
       display: flex;
     }
-    .tag-item{
+
+    .tag-item {
       /* width: 40px;
       height: 40px; */
       padding: 3px 5px;
@@ -72,107 +100,106 @@
       color: #fff;
       font-size: 12px;
     }
-    .scrolll{
+
+    .scrolll {
       width: 200px;
       height: 300px;
       overflow: auto;
       border: 1px solid #666;
       margin: 10px 20px;
     }
-    .inner{
+
+    .inner {
       width: 100%;
     }
-    ul, li{
+
+    ul,
+    li {
       padding: 0;
       margin: 0;
     }
   </style>
 </head>
+
 <body>
   <div class="scrolll">
-    <div class="inner">
-
-    </div>
+    <div class="inner"></div>
   </div>
-  <hr>
+  <hr />
 
   <div class="tag">
     <span class="tag-item">成龙</span>
     <span class="tag-item">李小龙</span>
     <span class="tag-item">远古巨龙</span>
   </div>
-  <hr>
+  <hr />
 
   <em>你好</em>
   <i>nihao</i>
   <strong>hello</strong>
   <b>你好</b>
 
-  <br>
-  <hr>
+  <br />
+  <hr />
   <label for="pass">点我，输入密码</label>
-  <input type="password" id="pass" placeholder="inset the password">
+  <input type="password" id="pass" placeholder="inset the password" />
   <label>name
-    <input type="text"/>
+    <input type="text" />
   </label>
-  <label>
-    <input type="radio" name="sex"/><span>男</span>
-  </label>
-  <label>
-    <input type="radio" name="sex"/><span>女</span>
-  </label>
+  <label> <input type="radio" name="sex" /><span>男</span> </label>
+  <label> <input type="radio" name="sex" /><span>女</span> </label>
   <input type="image" src="" width="100" height="100" alt="上传图片" />
-  <input type="file"  multiple="multiple" />
+  <input type="file" multiple="multiple" />
 
-  <br>
-  <hr>
+  <br />
+  <hr />
   <dialog open>111</dialog>
 
-  <br>
-  <hr>
+  <br />
+  <hr />
   <div class="box"></div>
 
-  <hr>
+  <hr />
   <div class="donghua"></div>
 
-  <hr>
+  <hr />
   <div class="trans"></div>
 
-  <hr>
+  <hr />
   <div class="cicle">
     <div class="min"></div>
   </div>
 
-  <hr>
-  <input type="text" class="ipt">
+  <hr />
+  <input type="text" class="ipt" />
   <ul class="list"></ul>
 
   <button class="nnn">click</button>
-  
+
   <script>
     /**
       构造函数和 add 方法参数为动态的，length 返回最新数组的长度，all 方法返回数组
     */
     // es6 写法：
-    class List{
-      constructor(...rest){
+    class List {
+      constructor(...rest) {
         this.arr = rest
         this.length = ''
       }
-      add(...eq){
+      add(...eq) {
         this.arr = [...this.arr, ...eq]
         this.length = this.arr.length
       }
-      all(){
+      all() {
         return this.arr
       }
     }
     let ls = new List('A', 'B', 'C')
     ls.add('D', 'E')
-    
-    console.log('ls.length:',ls.length) // 5
-    console.log('ls.all:',ls.all()) // ["A", "B", "C", "D", "E"]
-    
+
+    console.log('ls.length:', ls.length) // 5
+    console.log('ls.all:', ls.all()) // ["A", "B", "C", "D", "E"]
+
     // es5 写法：
     // function List(...rest){
     //   this.arr = rest
@@ -191,104 +218,254 @@
     // console.log('ls.length:',ls.length) // 5
     // console.log('ls.all():',ls.all()) // ["A", "B", "C", "D", "E"]
 
-
     /* 
       数据解析
      */
     let arr = [
-      {id: 1, title: '动物', pid: 0, is_over: 1, children: [
-        {id: 2, title: '大象', pid: 1, is_over: 1, children: []},
-        {id: 3, title: '熊猫', pid: 1, is_over: 1, children: []}
-      ]},
-      {id: 4, title: '人物', pid: 0, is_over: 1, children: [
-        {id: 5, title: '黄继光', pid: 4, is_over: 0, children: []},
-        {id: 6, title: '董存瑞', pid: 4, is_over: 1, children: []},
-        {id: 7, title: '邱少云', pid: 4, is_over: 0, children: []}
-      ]},
-      {id: 8, title: '景物', pid: 0, is_over: 0, children: []},
-      {id: 9, title: '电影', pid: 0, is_over: 1, children: [
-        {id: 10, title: '韩国电影', pid: 9, is_over: 1, children: []},
-        {id: 11, title: '美国电影', pid: 9, is_over: 1, children: [
-          {id: 12, title: 'DC电影', pid: 11, is_over: 0, children: []},
-          {id: 13, title: '漫威电影', pid: 11, is_over: 1, children: []}
-        ]},
-        {id: 14, title: '中国电影', pid: 9, is_over: 1, children: [
-          {id: 15, title: '香港电影', pid: 14, is_over: 0, children: []},
-          {id: 16, title: '大陆电影', pid: 14, is_over: 1, children: [
-            {id: 17, title: '恐怖片', pid: 16, is_over: 1, children: [
-              {id: 20, title: '笔仙', pid: 17, is_over: 0, children: []}
-            ]},
-            {id: 18, title: '悬疑片', pid: 16, is_over: 1, children: []}
-          ]},
-          {id: 19, title: '台湾电影', pid: 14, is_over: 1, children: []},
-        ]},
-      ]}
+      {
+        id: 1,
+        title: '动物',
+        pid: 0,
+        is_over: 1,
+        children: [
+          {
+            id: 2,
+            title: '大象',
+            pid: 1,
+            is_over: 1,
+            children: [],
+          },
+          {
+            id: 3,
+            title: '熊猫',
+            pid: 1,
+            is_over: 1,
+            children: [],
+          },
+        ],
+      },
+      {
+        id: 4,
+        title: '人物',
+        pid: 0,
+        is_over: 1,
+        children: [
+          {
+            id: 5,
+            title: '黄继光',
+            pid: 4,
+            is_over: 0,
+            children: [],
+          },
+          {
+            id: 6,
+            title: '董存瑞',
+            pid: 4,
+            is_over: 1,
+            children: [],
+          },
+          {
+            id: 7,
+            title: '邱少云',
+            pid: 4,
+            is_over: 0,
+            children: [],
+          },
+        ],
+      },
+      {
+        id: 8,
+        title: '景物',
+        pid: 0,
+        is_over: 0,
+        children: [],
+      },
+      {
+        id: 9,
+        title: '电影',
+        pid: 0,
+        is_over: 1,
+        children: [
+          {
+            id: 10,
+            title: '韩国电影',
+            pid: 9,
+            is_over: 1,
+            children: [],
+          },
+          {
+            id: 11,
+            title: '美国电影',
+            pid: 9,
+            is_over: 1,
+            children: [
+              {
+                id: 12,
+                title: 'DC电影',
+                pid: 11,
+                is_over: 0,
+                children: [],
+              },
+              {
+                id: 13,
+                title: '漫威电影',
+                pid: 11,
+                is_over: 1,
+                children: [],
+              },
+            ],
+          },
+          {
+            id: 14,
+            title: '中国电影',
+            pid: 9,
+            is_over: 1,
+            children: [
+              {
+                id: 15,
+                title: '香港电影',
+                pid: 14,
+                is_over: 0,
+                children: [],
+              },
+              {
+                id: 16,
+                title: '大陆电影',
+                pid: 14,
+                is_over: 1,
+                children: [
+                  {
+                    id: 17,
+                    title: '恐怖片',
+                    pid: 16,
+                    is_over: 1,
+                    children: [
+                      {
+                        id: 20,
+                        title: '笔仙',
+                        pid: 17,
+                        is_over: 0,
+                        children: [],
+                      },
+                    ],
+                  },
+                  {
+                    id: 18,
+                    title: '悬疑片',
+                    pid: 16,
+                    is_over: 1,
+                    children: [],
+                  },
+                ],
+              },
+              {
+                id: 19,
+                title: '台湾电影',
+                pid: 14,
+                is_over: 1,
+                children: [],
+              },
+            ],
+          },
+        ],
+      },
     ]
+    /**
+     * 根据指定key的值查找到该值在树结构中对应的完整路径（三个参数：查找的value值，查找的key值，数据源）
+     */
+    function getPathByKey(value, key, arr) {
+      let temppath = []
+      try {
+        function getNodePath(node) {
+          temppath.push(node)
+          if (node[key] === value) {
+            throw 'GOT IT!'
+          }
+          if (node.children && node.children.length > 0) {
+            for (var i = 0; i < node.children.length; i++) {
+              getNodePath(node.children[i])
+            }
+            temppath.pop()
+          } else {
+            temppath.pop()
+          }
+        }
+        for (let i = 0; i < arr.length; i++) {
+          getNodePath(arr[i])
+        }
+      } catch (e) {
+        return temppath
+      }
+    }
+    let pathObj = getPathByKey(20, 'id', arr)
+    console.log(pathObj, 'pathObj')
+    const pathIdList = pathObj.map(({ id }) => id)
+    console.log(pathIdList, 'pathIdList')
+
     // 计数，计算一共有多少条项目
-    function totalCount(arr){
+    function totalCount(arr) {
       let num = 0
-      function count(arr){
-        arr.forEach(element => {
+
+      function count(arr) {
+        arr.forEach((element) => {
           num++
-          if(element.children.length > 0){
+          if (element.children.length > 0) {
             count(element.children)
           }
-        });
+        })
       }
       count(arr)
       return num
     }
     let ress = totalCount(arr)
-    console.log("ress:",ress)
+    console.log('ress:', ress)
     // 将所有层级中is_over不为0的过滤出来
-    function filterData(arr){
-        let data = arr.filter(item=>{
-          if(item.children.length > 0){
-            item.children = filterData(item.children)
-          }
-          return item.is_over !== 0
-        })
-        return data
+    function filterData(arr) {
+      let data = arr.filter((item) => {
+        if (item.children.length > 0) {
+          item.children = filterData(item.children)
+        }
+        return item.is_over !== 0
+      })
+      return data
     }
-    console.log("newArr:",filterData(arr))
+    console.log('newArr:', filterData(arr))
     // 将所有层级中children无内容的删除键名，有子级的保留
-    function mapSource(arr){
-      return arr.map(item => {
-        if(item.children.length == 0){
+    function mapSource(arr) {
+      return arr.map((item) => {
+        if (item.children.length == 0) {
           delete item.children
-        }else{
+        } else {
           mapSource(item.children)
         }
         return item
       })
     }
-    console.log('mapSouce:',mapSource(arr))
-
+    console.log('mapSouce:', mapSource(arr))
 
     /* 
       滚动坐标判断
     */
     let oScroll = document.querySelector('.scrolll')
     let oInner = document.querySelector('.inner')
-    let oUl = document.createElement('ul');
+    let oUl = document.createElement('ul')
     let oLi = null
-    for(let i = 0; i < 100; i++){
+    for (let i = 0; i < 100; i++) {
       oLi = document.createElement('li')
-      oLi.innerHTML = `第${i+1}个li`  
+      oLi.innerHTML = `第${i + 1}个li`
       oUl.appendChild(oLi)
     }
     oInner.appendChild(oUl)
-    oScroll.addEventListener('scroll', function(){
+    oScroll.addEventListener('scroll', function () {
       console.log('this.scrollTop:', this.scrollTop)
       console.log('this.scrollHeight:', this.scrollHeight)
       console.log('this.offsetHeight:', this.offsetHeight)
       console.log('this.clientHeight:', this.clientHeight)
       console.log('this.offsetTop:', this.offsetTop)
-      if(this.scrollTop + this.clientHeight === this.scrollHeight){
+      if (this.scrollTop + this.clientHeight === this.scrollHeight) {
         console.log('load more ...')
       }
     })
-
 
     /* 
       打印结果：
@@ -300,30 +477,32 @@
       55
       time
     */
-    async function fn1(){
+    async function fn1() {
       console.log(11)
       return 'a'
     }
-    async function fn2(){
+    async function fn2() {
       console.log(22)
       return 'b'
     }
-    (async function fn3(){
+    ; (async function fn3() {
       console.log(33)
-      setTimeout(function(){
+      setTimeout(function () {
         console.log('time')
       }, 0)
       await fn1()
       await fn2()
       console.log(44)
       throw 'c'
-    })().then(res => {
-      console.log(res)
-    }, res => {
-      console.log(55)
-    })
+    })().then(
+      (res) => {
+        console.log(res)
+      },
+      (res) => {
+        console.log(55)
+      }
+    )
     console.log(66)
-
 
     /* 
       jsonp跨域请求数据
@@ -331,22 +510,23 @@
     let ipt = document.querySelector('.ipt')
     let list = document.querySelector('.list')
     let Script = null
-    ipt.onkeyup = function(){
-      if(Script){ // 保证页面只有一个script标签
+    ipt.onkeyup = function () {
+      if (Script) {
+        // 保证页面只有一个script标签
         document.body.removeChild(Script)
       }
       Script = document.createElement('script')
-      Script.src = 'http://suggestion.baidu.com/su?cb=myCb&wd='+ipt.value
+      Script.src = 'http://suggestion.baidu.com/su?cb=myCb&wd=' + ipt.value
       document.body.appendChild(Script)
     }
-    function myCb(json){
+
+    function myCb(json) {
       // console.log('json:', json)
       list.innerHTML = '' // 清空之前的结果
-      for(let i = 0; i < json.s.length; i++){
+      for (let i = 0; i < json.s.length; i++) {
         list.innerHTML += `<li>${json.s[i]}</li>`
       }
     }
-
 
     /* 
       鼠标移入移出控制缩放大小，移入移出都有效果
@@ -361,7 +541,6 @@
     //   this.style.transition = 'all 1s'
     // }
 
-
     /* 
       document.documentElement 得到的是页面的根元素
         <html lang="zh">
@@ -374,20 +553,37 @@
         <body>...</body>
     */
     console.log('document.documentElement:', document.documentElement)
-    console.log('document.documentElement.style:', document.documentElement.style)
+    console.log(
+      'document.documentElement.style:',
+      document.documentElement.style
+    )
     console.log('document.body:', document.body)
-
 
     /* 
       【数组的方法，forEach(), map(), filter()等会不会改变原数组】
       如果在遍历方法内对原数组进行了相关的改变操作，每次遍历得到且传入的参数为引用数据类型的话，会改变原数组，例如：map(item => {} )此处的item为引用数据类型；如果每次遍历得到且传入的参数为基本数据类型的话，则不会改变原数组，例如：map(item => {} )此处的item为基本数据类型。
      */
     let potato = [
-      {id: 1, w: 10},
-      {id: 2, w: 30},
-      {id: 3, w: 40},
-      {id: 4, w: 20},
-      {id: 5, w: 50}
+      {
+        id: 1,
+        w: 10,
+      },
+      {
+        id: 2,
+        w: 30,
+      },
+      {
+        id: 3,
+        w: 40,
+      },
+      {
+        id: 4,
+        w: 20,
+      },
+      {
+        id: 5,
+        w: 50,
+      },
     ]
     // let potato = [
     //   {id: 1, w: {a: "aa"}},
@@ -399,7 +595,7 @@
 
     // let potato = [1, 2, 3, 4]
 
-    // let newArr = potato.forEach(item => { 
+    // let newArr = potato.forEach(item => {
     //   item.w += 5
     //   // return item.id
     // })
@@ -410,7 +606,7 @@
     //   w.a += 5
     //   return {w: w.a}
     // })
-    // console.log('potato::', potato) 
+    // console.log('potato::', potato)
     // console.log('res::', res)
 
     // let newArr = potato.filter(item => {
@@ -420,7 +616,6 @@
     // console.log('potato:', potato)
     // console.log('newArr:', newArr)
 
-
     /* 
       【对象的拷贝】
       1.对象的方法（assign()）或者扩展运算符（...）复制的对象，得到的两个对象是false,且第一层value为基本数据类型的话，类似于深拷贝，改变一个，另一个对象不会变化，但是如果value是引用类型，改变这个引用类型里面的值，那个复制的对象对应的值也会变。也就是说对象的方法（assign()）或者扩展运算符（...）只能进行对象第一层的深拷贝，如果对象第一层的value值为引用类型，那么这个value的拷贝就无法实现深拷贝,所以从层次来说，严格意义上它们还是浅拷贝。
@@ -429,7 +624,10 @@
     let obj1 = {
       a: 1,
       b: 2,
-      c: {d: 4, e: 5}
+      c: {
+        d: 4,
+        e: 5,
+      },
     }
     let obj2 = JSON.parse(JSON.stringify(obj1))
     console.log(obj1 === obj2) // false
@@ -455,7 +653,6 @@
     // obj1.c.d = 22
     // console.log(obj2.c.d) // 22
 
-
     /*
       【setTimeout()方法中第一个参数函数的书写方式】
       1.加引号（setTimeout("func()",1000)）,且这个func会在全局找
@@ -463,9 +660,10 @@
       3.setTimeout(func(),1000),不会延时，func函数会立即执行
     */
     var userName = '张三'
-    function hello(name){
-      console.log('hello'+name)
-      console.log('this:',this)
+
+    function hello(name) {
+      console.log('hello' + name)
+      console.log('this:', this)
     }
     // const hello = (name)=>{
     //   console.log('hi,hello'+name)
@@ -494,26 +692,25 @@
     // }.bind(null,a),3000)
 
     var a = 123
-    setTimeout(function(){
-      console.log('a:',a) // 3秒后打印结果 a:123
-    },3000)
+    setTimeout(function () {
+      console.log('a:', a) // 3秒后打印结果 a:123
+    }, 3000)
 
-    window.onload = function(){
-      var local = function(){
-        function global(){
-              console.log("这是局部变量！");
-          }
-          setTimeout("global()",1000);//"这是全局变量！"
-          setTimeout(global,1000);//"这是局部变量！"
-      };
-      local();
-    };
-    function global(){
-      console.log("这是全局变量！")
+    window.onload = function () {
+      var local = function () {
+        function global() {
+          console.log('这是局部变量！')
+        }
+        setTimeout('global()', 1000) //"这是全局变量！"
+        setTimeout(global, 1000) //"这是局部变量！"
+      }
+      local()
     }
 
+    function global() {
+      console.log('这是全局变量！')
+    }
   </script>
-
-  
 </body>
+
 </html>
